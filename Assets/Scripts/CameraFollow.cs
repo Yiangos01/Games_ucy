@@ -18,8 +18,7 @@ public class CameraFollow : MonoBehaviour
     void Update()
     {
         Vector3 targetPos = player.position + offset;
-        targetPos.x = 6;
-        targetPos.y = 10;
+        targetPos.x = 0;
         transform.position = targetPos;
     }
 }

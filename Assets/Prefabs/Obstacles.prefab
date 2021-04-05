@@ -46,6 +46,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Wood_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000423861469710965, guid: 659941dd3f133a04c8c0d938fb87b1c5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1002940031091942517, guid: 659941dd3f133a04c8c0d938fb87b1c5,
         type: 3}
       propertyPath: m_RootOrder
@@ -119,6 +124,10 @@ PrefabInstance:
     - target: {fileID: 1997412889244782, guid: cdac07e55a0338249b60f9f60e4b9d09, type: 3}
       propertyPath: m_Name
       value: Prop_Wood_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997412889244782, guid: cdac07e55a0338249b60f9f60e4b9d09, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 4933981238565168, guid: cdac07e55a0338249b60f9f60e4b9d09, type: 3}
       propertyPath: m_RootOrder
@@ -251,6 +260,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_Crate
       objectReference: {fileID: 0}
+    - target: {fileID: 4006433783803533989, guid: 1943f4770d7aae740a88284b9339d9b8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1943f4770d7aae740a88284b9339d9b8, type: 3}
 --- !u!4 &6782304428401642995 stripped
@@ -270,6 +284,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Barrel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5553502816946093560, guid: 9c4f28138736238469d054ecb2707798,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 5555537382248636474, guid: 9c4f28138736238469d054ecb2707798,
         type: 3}

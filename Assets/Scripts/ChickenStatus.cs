@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ChickenStatus : MonoBehaviour
 {
-    [SerializeField] private int food = 0;
+    [SerializeField] public int food = 0;
+    [SerializeField] public int heart = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +18,29 @@ public class ChickenStatus : MonoBehaviour
         {
             Destroy(other.gameObject);
             food++;
-            Debug.Log("food" + food);
+            Debug.Log("food " + food);
         }
+    }
+    private void OnCollisionEnter(Collision collision)
+
+    {
+        
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            
+            heart--; 
+            Debug.Log("heart " + heart);
+            if(heart == 0)
+                Destroy(gameObject);
+           
+        }
+
 
     }
     // Update is called once per frame
     void Update()
     {
+        
         
     }
 }

@@ -16,7 +16,7 @@ public class GroundRight : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         groundSpawner.SpawnTile();
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 4);
     }
     // Update is called once per frame
     void Update()
@@ -33,7 +33,7 @@ public class GroundRight : MonoBehaviour
         int obstacleType = Random.Range(0, 4);
 
         // Choose a randompoint to spawn the obstacle
-        int obstacleOffset = Random.Range(-18, 18);
+        int obstacleOffset = Random.Range(-16, 16);
         Transform spawnPoint = transform.GetChild(3).transform;
         float z = spawnPoint.position.z;
         z = z + obstacleOffset;

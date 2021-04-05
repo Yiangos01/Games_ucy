@@ -11,6 +11,8 @@ TagManager:
   - South
   - Right
   - Left
+  - NextSpawn
+  - Obstacle
   layers:
   - Default
   - TransparentFX

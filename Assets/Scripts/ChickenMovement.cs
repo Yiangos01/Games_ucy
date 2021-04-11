@@ -10,6 +10,9 @@ public class ChickenMovement : MonoBehaviour
     protected Rigidbody rb;
     protected SphereCollider col;
     public LayerMask groundLayers;
+    public bool isgrounded;
+    protected Animator animator;
+    protected ChickenStatus chSt;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +20,8 @@ public class ChickenMovement : MonoBehaviour
         originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
-
+        animator = transform.GetChild(0).gameObject.GetComponent<Animator>(); //GetComponent<Animator>();
+        chSt = GetComponent<ChickenStatus>();
     }
 
     //Check if the player is grounded.
@@ -78,11 +82,12 @@ public class ChickenMovement : MonoBehaviour
 
         if (vmove != 0)
         {
-            if (IsGrounded())
+            if (IsGrounded()&& !chSt.isHit)
             {
                 // Vector3 move = hmove * transfom.right + vmove * forward;//One of the two, don't know which one is better
                 Vector3 move = hmove * right + vmove * forward;
                 rb.MovePosition(rb.position + move * Time.fixedDeltaTime * moveSpeed);
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(move);
             }
             else if (!IsGrounded())
             {
@@ -90,15 +95,20 @@ public class ChickenMovement : MonoBehaviour
                 rb.MovePosition(rb.position + move * Time.fixedDeltaTime * moveSpeed);
             }
         }
+        //Run Animation
+        animator.SetFloat("ChickenSpeed", vmove);
+        animator.SetBool("IsGrounded", IsGrounded());
+        animator.SetFloat("VerticalSpeed", rb.velocity.y);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit)
         {         
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+        isgrounded = IsGrounded();
 
     }
 

@@ -13,7 +13,7 @@ public class ChickenMovement : MonoBehaviour
     public bool isgrounded;
     protected Animator animator;
     protected ChickenStatus chSt;
-
+    protected Vector3 vel = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,42 +27,68 @@ public class ChickenMovement : MonoBehaviour
     //Check if the player is grounded.
     private bool IsGrounded()
     {
-        return Physics.CheckCapsule(col.bounds.center, new Vector3(col.bounds.center.x, col.bounds.min.y, col.bounds.center.z), col.radius * 0.9f, groundLayers);
+        return Physics.CheckSphere(transform.position, 0.2f, groundLayers, QueryTriggerInteraction.Ignore);
     }
 
-    void OnTriggerEnter(Collider other)
-    {
+    //void OnTriggerEnter(Collider other)
+    //{
         
-        if (other.gameObject.tag == "Left")
-        {
+    //    if (other.gameObject.tag == "Left")
+    //    {
+
            
-            rb.rotation = Quaternion.LookRotation(-other.gameObject.transform.right);
-            moveSpeed = 25.0f;
-            
-        }
-        if (other.gameObject.tag == "Right")
-        {
-            
-            transform.rotation = Quaternion.LookRotation(other.gameObject.transform.right);
-            moveSpeed = 25.0f;
-        }
-        
-    }
+    //          moveSpeed = 25.0f;
+           
+           
+    //    }
+    //    if (other.gameObject.tag == "Right")
+    //    {
 
-    void OnTriggerExit(Collider other)
-    {     
-        if (other.gameObject.tag == "Right")
-        {
+           
+    //          moveSpeed = 25.0f;
 
-            moveSpeed = originalSpeed;
 
-        }
+           
+
+    //    }
+
+    //}
+    void OnTriggerStay(Collider other)
+    {
+
         if (other.gameObject.tag == "Left")
         {
+          
+            rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(-other.gameObject.transform.right), 0.2f);
 
-            moveSpeed = originalSpeed;
+           
+
         }
+        if (other.gameObject.tag == "Right")
+        {
+            
+
+            rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(other.gameObject.transform.right), 0.2f);
+
+           
+        }
+
     }
+
+    //void OnTriggerExit(Collider other)
+    //{     
+    //    if (other.gameObject.tag == "Right")
+    //    {
+
+    //        moveSpeed = originalSpeed;
+
+    //    }
+    //    if (other.gameObject.tag == "Left")
+    //    {
+
+    //        moveSpeed = originalSpeed;
+    //    }
+    //}
 
     void FixedUpdate()
     {
@@ -82,31 +108,37 @@ public class ChickenMovement : MonoBehaviour
 
         if (vmove != 0)
         {
-            if (IsGrounded()&& !chSt.isHit)
+            if (IsGrounded() && !chSt.isHit)
             {
                 // Vector3 move = hmove * transfom.right + vmove * forward;//One of the two, don't know which one is better
                 Vector3 move = hmove * right + vmove * forward;
                 rb.MovePosition(rb.position + move * Time.fixedDeltaTime * moveSpeed);
-                transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(move);
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(move);//change direction of chicken mesh according with the movement(go right-left)
             }
             else if (!IsGrounded())
             {
                 Vector3 move = vmove * forward;
                 rb.MovePosition(rb.position + move * Time.fixedDeltaTime * moveSpeed);
+                transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(move);//change direction of chicken mesh according with the movement(go right-left)
             }
         }
-        //Run Animation
+        //Set Run Animation
         animator.SetFloat("ChickenSpeed", vmove);
+        //Set part of Jump animation
         animator.SetBool("IsGrounded", IsGrounded());
-        animator.SetFloat("VerticalSpeed", rb.velocity.y);
+        
+ 
     }
 
     // Update is called once per frame
     void Update()
     {
         if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit)
-        {         
+        {   //Jump Force
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //Set part of Jump animation
+            animator.SetTrigger("Jump");
+           
         }
         isgrounded = IsGrounded();
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4642212903907955666}
   - component: {fileID: 7546062459778271868}
   - component: {fileID: 6969456880908367910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8796902273272815133}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5894651323804911282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2155034053750648180}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30.4, y: 0, z: 19.1}
+  m_LocalPosition: {x: 33.3, y: 0, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4642212903907955666}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7398730454949482380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2444449699360615635}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 34.9, y: -0.7, z: -2.9}
+  m_LocalPosition: {x: 28.9, y: -0.7, z: -11.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4642212903907955666}
@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3850925889021054233}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 409954105557559840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2788374661423282740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NextSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 951408884272850882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,6 +373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grass
+      objectReference: {fileID: 0}
+    - target: {fileID: 5017225626374406368, guid: 92f52038c62958640bf89188228a0f11,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5017225626374406372, guid: 92f52038c62958640bf89188228a0f11,
         type: 3}

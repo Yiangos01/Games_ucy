@@ -10,13 +10,19 @@ public class GroundRight : MonoBehaviour
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        SpawnTrees();
         //SpawnObstacle();
     }
 
     void OnTriggerExit(Collider other)
     {
-        groundSpawner.SpawnTile();
-        Destroy(gameObject, 4);
+        if (other.gameObject.tag == "Player")//If player exits
+            groundSpawner.SpawnTile();
+        if (other.gameObject.tag == "CameraCollider")//If camera exits
+        {
+            Destroy(gameObject, 4);
+        }
+
     }
     // Update is called once per frame
     void Update()
@@ -27,6 +33,26 @@ public class GroundRight : MonoBehaviour
     public GameObject obstaclesPrefab;
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
+    void SpawnTrees() { 
+        // Choose random decor to fill decor positions
+        // 1
+        Transform DecorPoint = transform.GetChild(8).transform;
+        int decorType = Random.Range(0, 8);
+        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
+        // 2
+        DecorPoint = transform.GetChild(9).transform;
+        decorType = Random.Range(0, 8);
+        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
+        // 3
+        DecorPoint = transform.GetChild(10).transform;
+        decorType = Random.Range(0, 8);
+        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
+        // 4
+        DecorPoint = transform.GetChild(11).transform;
+        decorType = Random.Range(0, 8);
+        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
+
+    }
     void SpawnObstacle()
     {
         // Choose obstacle type
@@ -41,24 +67,7 @@ public class GroundRight : MonoBehaviour
         x = x - obstacleOffset;
         Vector3 obstaclePosition = new Vector3(x, spawnPoint.position.y, z);
 
-        // Choose random decor to fill decor positions
-        // 1
-        Transform DecorPoint = transform.GetChild(4).transform;
-        int decorType = Random.Range(0, 8);
-        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
-        // 2
-        DecorPoint = transform.GetChild(5).transform;
-        decorType = Random.Range(0, 8);
-        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
-        // 3
-        DecorPoint = transform.GetChild(6).transform;
-        decorType = Random.Range(0, 8);
-        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
-        // 4
-        DecorPoint = transform.GetChild(7).transform;
-        decorType = Random.Range(0, 8);
-        Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
-
+        
         // Choose fruit type
         int fruitType = Random.Range(0, 7);
         // Choose a random point to spawn fruit

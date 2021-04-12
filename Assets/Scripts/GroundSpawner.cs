@@ -7,8 +7,7 @@ public class GroundSpawner : MonoBehaviour
     public GameObject groundTile;
     public GameObject leftTile;
     public GameObject rightTile;
-   
-   
+    public bool isStart = false;
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
 
@@ -71,21 +70,24 @@ public class GroundSpawner : MonoBehaviour
     }
 
 
-    // Start is called before the first frame update
+        // Start is called before the first frame update
     void Start()
     {
+        
         global_rotation = new Vector3(0, 0, 0);
         for (int i =0; i < 4; i++)
-        {
+        {  
+            isStart = true;
             SpawnStraightTile();
-        }
-        
+
+            }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        isStart = false;
     }
 
 

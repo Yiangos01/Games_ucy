@@ -42,7 +42,7 @@ public class ChickenStatus : MonoBehaviour
             
             if(heart == 0)
                 Destroy(gameObject);
-            isHit = true;
+            animator.SetTrigger("IsHit");
            // transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(transform.forward+transform.right);
         }
 
@@ -51,29 +51,15 @@ public class ChickenStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (isHit)
+        //Check If the Dizzy animation is playing-if it's playing then set isHit = true
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|Dizzy"))
         {
-            timer -= Time.deltaTime;
-            if (timer >= 0f)
-            {
-
-                chMv.moveSpeed = 0.0f;
-                animator.SetBool("IsHit", true);
-
-
-            }
-            
-            else
-            {
-                animator.SetBool("IsHit", false);
-                timer = 2f;
-                isHit = false;
-                chMv.moveSpeed = 30.0f;
-
-            }
-           
+            isHit = true;
         }
+        else
+            isHit = false;//Dizzy animation has stopped playing
+
+        
       
 
 

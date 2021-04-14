@@ -16,6 +16,10 @@ public class GroundLeft : MonoBehaviour
         //SpawnObstacle();
         SpawnTrees();
         SpawnFruits();
+
+        int frequencyLake = Random.Range(0, 20);
+        if (frequencyLake < 1)
+            groundSpawner.SpawnLake();
     }
 
     void OnTriggerExit(Collider other)

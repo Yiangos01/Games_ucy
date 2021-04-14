@@ -6,17 +6,19 @@ public class ChickenStatus : MonoBehaviour
 {
     [SerializeField] public int food = 0;
     [SerializeField] public int heart = 10;
+    [SerializeField] public int goldenEgg = 0;
+    GroundSpawner groundSpawner;
     protected Animator animator;
-    protected float timer = 2f;
     public bool isHit;
     protected ChickenMovement chMv;
-    protected Collision otherCol;
+
     // Start is called before the first frame update
     void Start()
     {
         isHit = false;
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         chMv = GetComponent<ChickenMovement>();
+        groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -28,7 +30,30 @@ public class ChickenStatus : MonoBehaviour
             Debug.Log("food " + food);
            
         }
-       
+
+        if (other.gameObject.CompareTag("GoldenEgg"))
+        {
+            Destroy(other.gameObject);
+            goldenEgg++;
+            Debug.Log("Golden Egg " + goldenEgg);
+            //Spawn the Barn if collected 2 golden Eggs
+            if (goldenEgg == 2) {
+                groundSpawner.SpawnBarn();
+            }
+
+        }
+        if (other.gameObject.CompareTag("Barn"))
+        {
+            Destroy(other.gameObject);
+            //SpawnChickens();
+
+        }
+        if (other.gameObject.CompareTag("Wave"))
+        {
+            Destroy(other.gameObject);
+        }
+
+
     }
     private void OnCollisionEnter(Collision collision)
 
@@ -42,7 +67,7 @@ public class ChickenStatus : MonoBehaviour
                 Destroy(gameObject); 
             //Set hit animation
             animator.SetTrigger("IsHit");
-            Destroy(collision.gameObject,1.7f);//Destroy object after a while
+            Destroy(collision.gameObject,1.8f);//Destroy object after a while
             
         }
         
@@ -56,12 +81,7 @@ public class ChickenStatus : MonoBehaviour
             isHit = true;
         else
             isHit = false;//Dizzy animation has stopped playing
-           
-                
-        
-        
       
-
 
     }
 }

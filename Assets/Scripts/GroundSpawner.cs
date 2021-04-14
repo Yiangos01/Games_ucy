@@ -7,6 +7,8 @@ public class GroundSpawner : MonoBehaviour
     public GameObject groundTile;
     public GameObject leftTile;
     public GameObject rightTile;
+    public GameObject barn;
+    public GameObject lake;
     public bool isStart = false;
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
@@ -68,8 +70,20 @@ public class GroundSpawner : MonoBehaviour
       
 
     }
+    public void SpawnBarn() {
+        GameObject temp = Instantiate(barn, nextSpawnPoint, Quaternion.LookRotation(-Vector3.forward));
+        temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
 
+    }
+    //Spawn Chickens when reached the barn
+    //public void SpawnChickens() 
+    //{ 
+    //}
 
+    public void SpawnLake() {
+        GameObject temp = Instantiate(lake, new Vector3(nextSpawnPoint.x, -0.2f, nextSpawnPoint.z), Quaternion.identity);
+        temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+    }
         // Start is called before the first frame update
     void Start()
     {

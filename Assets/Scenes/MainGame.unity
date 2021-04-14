@@ -187,6 +187,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &353950406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 353950408}
+  - component: {fileID: 353950407}
+  m_Layer: 0
+  m_Name: GoldenEggCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &353950407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353950406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8463bad740b6f4a851cb4987f72167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goldenEgg: 0
+--- !u!4 &353950408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353950406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -59.813206, y: 50.429276, z: 191.28563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440742099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1395,8 @@ MonoBehaviour:
     type: 3}
   rightTile: {fileID: 4131314160809194177, guid: d05b97d603dfd4f42a240fa4fe95cd43,
     type: 3}
+  barn: {fileID: 4171711223200907344, guid: 5b402e6a9c88a9241989b01514b3c3a8, type: 3}
+  lake: {fileID: 3363635681877419202, guid: d4034bcb5639a6e49a53f77be1646df3, type: 3}
   isStart: 0
 --- !u!1 &1590807719
 GameObject:
@@ -1611,7 +1657,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1633081993
 MonoBehaviour:
@@ -3027,11 +3073,11 @@ Transform:
   m_GameObject: {fileID: 3297595422997369777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 1843491422}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3297595422997369786
 MonoBehaviour:
@@ -3047,6 +3093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food: 0
   heart: 10
+  goldenEgg: 0
   isHit: 0
 --- !u!1 &3393568608516212906
 GameObject:

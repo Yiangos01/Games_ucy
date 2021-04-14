@@ -5,7 +5,10 @@ using UnityEngine;
 public class GroundTile : MonoBehaviour
 {
     GroundSpawner groundSpawner;
-   
+    public GameObject obstaclesPrefab;
+    public GameObject treesPrefab;
+    public GameObject fruitsPrefab;
+    public GameObject goldenEggPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,10 @@ public class GroundTile : MonoBehaviour
         //Always spawn decor and fruits
         SpawnTrees();
         SpawnFruits();
+        //Spawn eggs less frequent-0.33 chance
+        int frequency = Random.Range(0, 3);
+        if(frequency<1)
+            SpawnGoldenEggs();
     }
 
     void OnTriggerExit (Collider other)
@@ -39,48 +46,69 @@ public class GroundTile : MonoBehaviour
         
     }
 
-    public GameObject obstaclesPrefab;
-    public GameObject treesPrefab;
-    public GameObject fruitsPrefab;
+   
     void SpawnTrees() { 
         // Choose random decor to fill decor positions
         // 1
         Transform DecorPoint = transform.GetChild(4).transform;
-        int decorType = Random.Range(0, 8);
+        int decorType = Random.Range(0, 9);
         Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
         // 2
         DecorPoint = transform.GetChild(5).transform;
-        decorType = Random.Range(0, 8);
+        decorType = Random.Range(0, 9);
         Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
         // 3
         DecorPoint = transform.GetChild(6).transform;
-        decorType = Random.Range(0, 8);
+        decorType = Random.Range(0, 9);
         Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
         // 4
         DecorPoint = transform.GetChild(7).transform;
-        decorType = Random.Range(0, 8);
+        decorType = Random.Range(0, 9);
         Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
     }
     void SpawnFruits() {
         // Choose fruit type
-        Transform spawnPoint = transform.GetChild(3).transform;
-        float z = spawnPoint.position.z;
-        float x = spawnPoint.position.x;
+        
+        float z;
+        float x;
+        float y;
         int fruitType = Random.Range(0, 7);
         // Choose a random point to spawn fruit
-        int fruitOffset = Random.Range(-18, 18);
+        int fruitOffset = Random.Range(-16, 16);
+        int fruitOffsetY = Random.Range(0, 5);
         Transform fruitPoint = transform.GetChild(8).transform;
         z = fruitPoint.position.z;
         z = z + fruitOffset;
         x = fruitPoint.position.x;
         x = x - fruitOffset;
-        Vector3 fruitPosition = new Vector3(x, fruitPoint.position.y, z);
+        y = fruitPoint.position.y;
+        y = y + fruitOffsetY;
+        Vector3 fruitPosition = new Vector3(x, y, z);
         Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+    }
+    void SpawnGoldenEggs()
+    {
+        float z;
+        float x;
+        float y;
+        // Choose a random point to spawn fruit
+        int goldenEggOffset = Random.Range(-16, 16);
+        int goldenEggOffsetY = Random.Range(0, 5);
+        Transform goldenEggPoint = transform.GetChild(9).transform;
+        z = goldenEggPoint.position.z;
+        z = z + goldenEggOffset;
+        x = goldenEggPoint.position.x;
+        x = x - goldenEggOffset;
+        y = goldenEggPoint.position.y;
+        y = y + goldenEggOffsetY;
+
+        Vector3 goldenEggPosition = new Vector3(x, y, z);
+        Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
     }
     void SpawnObstacle ()
     {
         // Choose obstacle type
-        int obstacleType = Random.Range(0, 4);
+        int obstacleType = Random.Range(0, 5);
 
         // Choose a randompoint to spawn the obstacle
         int obstacleOffset = Random.Range(-16, 16);
@@ -91,8 +119,29 @@ public class GroundTile : MonoBehaviour
         x = x - obstacleOffset;
         Vector3 obstaclePosition = new Vector3(x, spawnPoint.position.y, z);
 
+        //Choose randomly a rotation for the obstacle
+        Quaternion rotation;// = Quaternion.LookRotation(spawnPoint.forward);
+        if (obstacleType == 2)//Wheel Barrow orientation
+        {
+            int frequency = Random.Range(0, 3);
+            if (frequency == 0)
+                rotation = Quaternion.LookRotation(spawnPoint.forward);
+            else if (frequency == 1)
+                rotation = Quaternion.LookRotation(-spawnPoint.right);
+            else
+                rotation = Quaternion.LookRotation(-spawnPoint.forward);
+        }
+        else {
+            int frequency = Random.Range(0, 2);
+            if (frequency == 0)
+                rotation = Quaternion.LookRotation(spawnPoint.forward);
+            else 
+                rotation = Quaternion.LookRotation(-spawnPoint.right);
+        }
+        
+
         // spawnPoint.position.x = spawnPoint.position.x + 0.1f;
         // Spawn the obstacle at the position
-        Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, Quaternion.identity, transform);
+        Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
     }
 }

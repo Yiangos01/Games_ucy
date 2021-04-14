@@ -10,6 +10,7 @@ public class ChickenStatus : MonoBehaviour
     protected float timer = 2f;
     public bool isHit;
     protected ChickenMovement chMv;
+    protected Collision otherCol;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,27 +26,26 @@ public class ChickenStatus : MonoBehaviour
             Destroy(other.gameObject);
             food++;
             Debug.Log("food " + food);
+           
         }
+       
     }
     private void OnCollisionEnter(Collision collision)
 
     {
-        
+
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            
-            heart--; 
+            heart--;
             Debug.Log("heart " + heart);
+            if (heart == 0)
+                Destroy(gameObject); 
             //Set hit animation
-            
-            
-            
-            if(heart == 0)
-                Destroy(gameObject);
             animator.SetTrigger("IsHit");
-           // transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(transform.forward+transform.right);
+            Destroy(collision.gameObject,1.7f);//Destroy object after a while
+            
         }
-
+        
         
     }
     // Update is called once per frame
@@ -53,12 +53,12 @@ public class ChickenStatus : MonoBehaviour
     {
         //Check If the Dizzy animation is playing-if it's playing then set isHit = true
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|Dizzy"))
-        {
             isHit = true;
-        }
         else
             isHit = false;//Dizzy animation has stopped playing
-
+           
+                
+        
         
       
 

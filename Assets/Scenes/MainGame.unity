@@ -3092,9 +3092,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: 0
-  heart: 10
+  heart: 5
   goldenEgg: 0
   isHit: 0
+  pattern: 
 --- !u!1 &3393568608516212906
 GameObject:
   m_ObjectHideFlags: 0

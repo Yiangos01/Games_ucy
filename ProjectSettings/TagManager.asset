@@ -17,6 +17,13 @@ TagManager:
   - GoldenEgg
   - Barn
   - Wave
+  - apple
+  - banana
+  - carrot
+  - cherry
+  - grape
+  - pumpking
+  - watermalon
   layers:
   - Default
   - TransparentFX

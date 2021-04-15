@@ -9,6 +9,11 @@ public class GroundTile : MonoBehaviour
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
+    float obstacle_pos_x;
+    float obstacle_pos_y;
+    float obstacle_pos_z;
+    public float threshold_dist;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +46,7 @@ public class GroundTile : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void Update(){}
 
    
     void SpawnTrees() { 
@@ -84,7 +86,32 @@ public class GroundTile : MonoBehaviour
         y = fruitPoint.position.y;
         y = y + fruitOffsetY;
         Vector3 fruitPosition = new Vector3(x, y, z);
-        Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+
+        // Avoid Collision with obstacles
+        float diff_x;
+        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x)); 
+        if (diff_x > threshold_dist)
+        {
+            Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            return;
+        }
+        
+        float diff_y;
+        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
+        if (diff_y > threshold_dist)
+        {
+            Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            return;
+        }
+        
+        float diff_z;
+        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
+        if (diff_z > threshold_dist)
+        {
+            Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            return;
+        }
+
     }
     void SpawnGoldenEggs()
     {
@@ -103,7 +130,33 @@ public class GroundTile : MonoBehaviour
         y = y + goldenEggOffsetY;
 
         Vector3 goldenEggPosition = new Vector3(x, y, z);
-        Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+
+        // Avoid Collision with obstacles
+        float diff_x;
+        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x));
+        if (diff_x > threshold_dist)
+        {
+            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            return;
+        }
+
+        float diff_y;
+        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
+        if (diff_y > threshold_dist)
+        {
+            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            return;
+        }
+
+        float diff_z;
+        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
+        if (diff_z > threshold_dist)
+        {
+            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            return;
+        }
+
+        
     }
     void SpawnObstacle ()
     {
@@ -143,5 +196,8 @@ public class GroundTile : MonoBehaviour
         // spawnPoint.position.x = spawnPoint.position.x + 0.1f;
         // Spawn the obstacle at the position
         Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
+        obstacle_pos_x = x;
+        obstacle_pos_y = 0.5f;
+        obstacle_pos_z = z;
     }
 }

@@ -5,15 +5,19 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
     public float rotSpeed = 50.0f;
+    public int category = -1;
     private float posy;
     
     // Start is called before the first frame update
     void Start()
     {
         posy = transform.position.y;
-
     }
    
+    public int get_category()
+    {
+        return category;
+    }
 
     // Update is called once per frame
     void Update()

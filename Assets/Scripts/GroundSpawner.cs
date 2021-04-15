@@ -24,10 +24,12 @@ public class GroundSpawner : MonoBehaviour
         else if (tile < 18)
         {
             SpawnRightTile();
+            //SpawnStraightTile();
         }
         else if (tile <= 20)
         {
             SpawnLeftTile();
+            //SpawnStraightTile();
         }
 
     }

@@ -30,29 +30,6 @@ public class ChickenMovement : MonoBehaviour
         return Physics.CheckSphere(transform.position, 0.2f, groundLayers, QueryTriggerInteraction.Ignore);
     }
 
-    //void OnTriggerEnter(Collider other)
-    //{
-        
-    //    if (other.gameObject.tag == "Left")
-    //    {
-
-           
-    //          moveSpeed = 25.0f;
-           
-           
-    //    }
-    //    if (other.gameObject.tag == "Right")
-    //    {
-
-           
-    //          moveSpeed = 25.0f;
-
-
-           
-
-    //    }
-
-    //}
     void OnTriggerStay(Collider other)
     {
 
@@ -75,21 +52,7 @@ public class ChickenMovement : MonoBehaviour
 
     }
 
-    //void OnTriggerExit(Collider other)
-    //{     
-    //    if (other.gameObject.tag == "Right")
-    //    {
-
-    //        moveSpeed = originalSpeed;
-
-    //    }
-    //    if (other.gameObject.tag == "Left")
-    //    {
-
-    //        moveSpeed = originalSpeed;
-    //    }
-    //}
-
+   
     void FixedUpdate()
     {
 
@@ -117,7 +80,7 @@ public class ChickenMovement : MonoBehaviour
             }
             else if (!IsGrounded())
             {
-                Vector3 move = vmove * forward;
+                Vector3 move = hmove * right+ vmove * forward;
                 rb.MovePosition(rb.position + move * Time.fixedDeltaTime * moveSpeed);
                 transform.GetChild(0).gameObject.transform.rotation = Quaternion.LookRotation(move);//change direction of chicken mesh according with the movement(go right-left)
             }

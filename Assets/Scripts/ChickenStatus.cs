@@ -130,7 +130,14 @@ public class ChickenStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Barn"))
         {
             Destroy(other.gameObject);
-            //SpawnChickens();
+            //groundSpawner.SpawnChickens();
+
+        }
+        if (other.gameObject.CompareTag("Potion"))
+        {
+
+            Destroy(other.gameObject);
+            heart++;
 
         }
         if (other.gameObject.CompareTag("Wave"))

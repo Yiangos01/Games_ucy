@@ -3096,6 +3096,8 @@ MonoBehaviour:
   goldenEgg: 0
   isHit: 0
   pattern: 
+  targetPattern: 
+  Fruits: {fileID: 0}
 --- !u!1 &3393568608516212906
 GameObject:
   m_ObjectHideFlags: 0

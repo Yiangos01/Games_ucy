@@ -24,6 +24,8 @@ TagManager:
   - grape
   - pumpking
   - watermalon
+  - Potion
+  - Wall
   layers:
   - Default
   - TransparentFX

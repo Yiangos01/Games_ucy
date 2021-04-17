@@ -9,6 +9,7 @@ public class GroundTile : MonoBehaviour
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
+    public GameObject potionPrefab;
     float obstacle_pos_x;
     float obstacle_pos_y;
     float obstacle_pos_z;
@@ -25,9 +26,12 @@ public class GroundTile : MonoBehaviour
         SpawnTrees();
         SpawnFruits();
         //Spawn eggs less frequent-0.33 chance
-        int frequency = Random.Range(0, 3);
-        if(frequency<1)
+        int frequencyEgg = Random.Range(0, 10);
+        int frequencyPotion = Random.Range(0, 20);
+        if (frequencyEgg<1)
             SpawnGoldenEggs();
+        if (frequencyPotion <1)
+            SpawnPotion();
     }
 
     void OnTriggerExit (Collider other)
@@ -112,6 +116,48 @@ public class GroundTile : MonoBehaviour
             return;
         }
 
+    }
+    void SpawnPotion() {
+        float z;
+        float x;
+        float y;
+        // Choose a random point to spawn fruit
+        int potionOffset = Random.Range(-16, 16);
+        int potionOffsetY = Random.Range(0, 5);
+        Transform potionPoint = transform.GetChild(10).transform;
+        z = potionPoint.position.z;
+        z = z + potionOffset;
+        x = potionPoint.position.x;
+        x = x - potionOffset;
+        y = potionPoint.position.y;
+        y = y + potionOffsetY;
+
+        Vector3 potionPosition = new Vector3(x, y, z);
+
+        // Avoid Collision with obstacles
+        float diff_x;
+        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x));
+        if (diff_x > threshold_dist)
+        {
+            Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            return;
+        }
+
+        float diff_y;
+        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
+        if (diff_y > threshold_dist)
+        {
+            Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            return;
+        }
+
+        float diff_z;
+        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
+        if (diff_z > threshold_dist)
+        {
+            Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            return;
+        }
     }
     void SpawnGoldenEggs()
     {

@@ -26,6 +26,7 @@ TagManager:
   - watermalon
   - Potion
   - Wall
+  - finishText
   layers:
   - Default
   - TransparentFX

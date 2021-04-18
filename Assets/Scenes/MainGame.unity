@@ -139,6 +139,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Particle System
       objectReference: {fileID: 0}
+    - target: {fileID: 7525158628665809396, guid: 8940e444df1485749bb1967d638b9837,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525158628665809396, guid: 8940e444df1485749bb1967d638b9837,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7525158628665809396, guid: 8940e444df1485749bb1967d638b9837,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7559668636211912323, guid: 8940e444df1485749bb1967d638b9837,
         type: 3}
       propertyPath: m_RootOrder

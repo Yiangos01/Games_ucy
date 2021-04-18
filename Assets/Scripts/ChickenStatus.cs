@@ -14,6 +14,9 @@ public class ChickenStatus : MonoBehaviour
     public List<int> pattern;
     public List<int> targetPattern;
     public GameObject Fruits;
+    //public GameObject obstaclesPrefab;
+    public bool strengthMode = false; //Is chicken in strength mode
+    public ParticleSystem particles;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class ChickenStatus : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         createTargetPattern();
     }
 
@@ -153,14 +157,23 @@ public class ChickenStatus : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            heart--;
-            Debug.Log("heart " + heart);
-            if (heart == 0)
-                // Game Over message - button to restart or go back to main menu
-                Destroy(gameObject); 
-            //Set hit animation
-            animator.SetTrigger("IsHit");
-            Destroy(collision.gameObject,1.8f);//Destroy object after a while
+            if (!strengthMode)
+            {
+                heart--;
+                Debug.Log("heart " + heart);
+                if (heart == 0)
+                    // Game Over message - button to restart or go back to main menu
+                    Destroy(gameObject);
+                //Set hit animation
+                animator.SetTrigger("IsHit");
+                Destroy(collision.gameObject, 1.8f);//Destroy object after a while
+            }
+            else {//If in strength mode
+                particles.transform.position = collision.gameObject.transform.position;
+                particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
+                particles.Play();//Play Particle Destruction
+                Destroy(collision.gameObject);//Object dissappears
+            }
             
         }
         

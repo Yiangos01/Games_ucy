@@ -22,10 +22,10 @@ public class GroundRight : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")//If player exits
             groundSpawner.SpawnTile();
-        if (other.gameObject.tag == "CameraCollider")//If camera exits
-        {
-            Destroy(gameObject, 4);
-        }
+        //if (other.gameObject.tag == "CameraCollider")//If camera exits
+        //{
+        //    Destroy(gameObject, 4);
+        //}
 
     }
     // Update is called once per frame

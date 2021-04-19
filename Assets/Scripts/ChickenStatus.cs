@@ -19,11 +19,16 @@ public class ChickenStatus : MonoBehaviour
     public ParticleSystem particles;
     public float strengthDuration;
     float strStart;
+
     public GameObject chickenBody;
+    public GameObject chickenWings;
+    public GameObject chickenThigs;
     //public GameObject uiFinish;
     public Color strengthColor;
     private Color originalColor;
-    SkinnedMeshRenderer chk_renderer;
+    SkinnedMeshRenderer chk_rendererBD;
+    SkinnedMeshRenderer chk_rendererWG;
+    SkinnedMeshRenderer chk_rendererTH;
     public int patternSize;
     public GameObject gameOverText;
 
@@ -38,8 +43,10 @@ public class ChickenStatus : MonoBehaviour
         createTargetPattern();
 
         // Access chicken's body color
-        chk_renderer = chickenBody.GetComponent<SkinnedMeshRenderer>();
-        originalColor = chk_renderer.material.color;
+        chk_rendererBD = chickenBody.GetComponent<SkinnedMeshRenderer>();
+        chk_rendererWG = chickenWings.GetComponent<SkinnedMeshRenderer>();
+        chk_rendererTH = chickenThigs.GetComponent<SkinnedMeshRenderer>();
+        originalColor = chk_rendererBD.material.color;
 
 
     }
@@ -115,7 +122,9 @@ public class ChickenStatus : MonoBehaviour
                 strStart = Time.time;
                 strengthMode = true;
                 // Change Color
-                chk_renderer.material.color = strengthColor;
+                chk_rendererBD.material.color = strengthColor;
+                chk_rendererWG.material.color = strengthColor;
+                chk_rendererTH.material.color = strengthColor;
                 Debug.Log("Pattern completed");
                 Debug.Log("Create new pattern");
                 pattern.Clear();
@@ -220,7 +229,9 @@ public class ChickenStatus : MonoBehaviour
         if (Time.time - strStart > strengthDuration && strengthMode)
         {
             strengthMode = false;
-            chk_renderer.material.color = originalColor;
+            chk_rendererBD.material.color = originalColor;
+            chk_rendererWG.material.color = originalColor;
+            chk_rendererTH.material.color = originalColor;
         }
     }
 }

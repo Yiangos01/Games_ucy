@@ -83,7 +83,7 @@ public class GroundSpawner : MonoBehaviour
     //}
 
     public void SpawnLake() {
-        GameObject temp = Instantiate(lake, new Vector3(nextSpawnPoint.x, -0.2f, nextSpawnPoint.z), Quaternion.identity);
+        GameObject temp = Instantiate(lake, new Vector3(nextSpawnPoint.x, 0.8f, nextSpawnPoint.z), Quaternion.identity);
         temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
     }
         // Start is called before the first frame update

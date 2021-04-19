@@ -47,7 +47,7 @@ public class ChickenMovement : MonoBehaviour
 
         }
     }
-        void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
 
         if (other.gameObject.tag == "Left")
@@ -106,6 +106,10 @@ public class ChickenMovement : MonoBehaviour
             //Set Run Animation
             animator.SetFloat("ChickenSpeed", vmove);
             //Set part of Jump animation
+            animator.SetBool("IsGrounded", IsGrounded());
+        }
+        else {
+            animator.SetFloat("ChickenSpeed", 0f);
             animator.SetBool("IsGrounded", IsGrounded());
         }
     }

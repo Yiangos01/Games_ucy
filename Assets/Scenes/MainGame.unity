@@ -3585,7 +3585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: 0
-  heart: 3
+  heart: 5
   goldenEgg: 0
   isHit: 0
   pattern: 

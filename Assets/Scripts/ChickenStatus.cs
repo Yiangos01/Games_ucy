@@ -140,13 +140,13 @@ public class ChickenStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
 
-            
+
             // Debug.Log(Fruits.Materials);
             Destroy(other.gameObject);
             updatePattern(other.gameObject.name);
             food++;
             //Debug.Log("food " + food);
-           
+
         }
 
         if (other.gameObject.CompareTag("GoldenEgg"))
@@ -163,11 +163,11 @@ public class ChickenStatus : MonoBehaviour
         }
         //if (other.gameObject.CompareTag("Barn"))
         //{
-         //   Destroy(other.gameObject);
-          //  uiFinish.SetActive(true);
-            // Stops
+        //   Destroy(other.gameObject);
+        //  uiFinish.SetActive(true);
+        // Stops
 
-            // groundSpawner.SpawnChickens();
+        // groundSpawner.SpawnChickens();
 
         //}
         if (other.gameObject.CompareTag("Potion"))
@@ -182,8 +182,22 @@ public class ChickenStatus : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-
+        
     }
+
+    //Function for blinking the object when hit a moving object
+    private IEnumerator Blink()
+    {
+            transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+    }
+
     private void OnCollisionEnter(Collision collision)
 
     {
@@ -213,8 +227,17 @@ public class ChickenStatus : MonoBehaviour
 
             
         }
-        
-        
+        if (collision.gameObject.CompareTag("RotatingObstacle"))//The object blinks-flickers when hit moving objects
+        {
+            if (!strengthMode)
+            {
+                heart--;
+                StartCoroutine(Blink());
+            }
+
+        }
+
+
     }
     // Update is called once per frame
     void Update()
@@ -226,8 +249,9 @@ public class ChickenStatus : MonoBehaviour
             isHit = false;//Dizzy animation has stopped playing
       
         // If strength expire tranform chicken to its original form
-        if (Time.time - strStart > strengthDuration && strengthMode)
-        {
+        if (Time.time - strStart > strengthDuration && strengthMode) {
+   
+            StartCoroutine(Blink());//Blink to show that your strength mode is ending
             strengthMode = false;
             chk_rendererBD.material.color = originalColor;
             chk_rendererWG.material.color = originalColor;

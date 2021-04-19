@@ -23,6 +23,6 @@ public class Food : MonoBehaviour
     void Update()
     {
        transform.Rotate(Vector3.up * Time.deltaTime * rotSpeed);
-        transform.position = new Vector3(transform.position.x,Mathf.PingPong(Time.time * 0.5f, 0.5f) + posy, transform.position.z);
+       transform.position = new Vector3(transform.position.x,Mathf.PingPong(Time.time * 0.5f, 0.5f) + posy, transform.position.z);
     }
 }

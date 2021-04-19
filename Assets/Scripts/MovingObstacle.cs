@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class MovingObstacle : MonoBehaviour
 {
-    public Vector3 dir = Vector3.zero;
-    public float speed = 50f;
-    public float pos;
+   
+    public float speed;
+    public Vector3 direction;
+    Vector3 initialPos;
+   
     // Start is called before the first frame update
     void Start()
     {
-       // pos = transform.right;
+        speed = Random.Range(5.0f,15.0f);
+        initialPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Camera cam = Camera.main;
-        Vector3 rig = cam.transform.right;
-        rig.y = 0;
-        rig.Normalize();
+        
         //transform.position = transform.position + Time.deltaTime * dir*speed;Mathf.PingPong(Time.time * 0.5f, 0.5f)
-        transform.position = transform.position + rig*Time.deltaTime * speed;
+       // transform.position = transform.position + direction*Time.deltaTime * speed;
+        transform.position = new Vector3(direction.x *Mathf.PingPong(Time.time * speed, 22f) +initialPos.x-10f* direction.x, transform.position.y, direction.z * Mathf.PingPong(Time.time * speed, 22f) + initialPos.z-10f* direction.z);
+       
     }
 }

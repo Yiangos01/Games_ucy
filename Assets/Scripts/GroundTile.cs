@@ -31,7 +31,7 @@ public class GroundTile : MonoBehaviour
         
             SpawnFruits();
             //Spawn eggs less frequent-0.33 chance
-            int frequencyEgg = Random.Range(0, 2);
+            int frequencyEgg = Random.Range(0, 5);
             int frequencyPotion = Random.Range(0, 20);
             if (frequencyEgg < 1)
                 SpawnGoldenEggs();
@@ -214,8 +214,8 @@ public class GroundTile : MonoBehaviour
     {
 
         //Choose if spawn a moving obstacle-less chance
-         int moving = Random.Range(0, 5);
-        //int moving = 1;
+        int moving = Random.Range(0, 5);
+        
         if (moving < 1) {
             Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
             obstacle_pos_x = transform.GetChild(3).transform.position.x;
@@ -223,18 +223,19 @@ public class GroundTile : MonoBehaviour
             obstacle_pos_z = transform.GetChild(3).transform.position.z;
 
         }
-        //if (moving == 1)
-        //{
-        //    float x = transform.GetChild(3).transform.position.x;
-        //    float y = transform.GetChild(3).transform.position.y;
-        //    float z = transform.GetChild(3).transform.position.z;
+        else if (moving == 1)
+        {
+            Transform spawnPoint = transform.GetChild(3).transform;
+            float x = spawnPoint.position.x;//transform.GetChild(3).transform.position.x;
+            float y = spawnPoint.position.y;
+            float z = spawnPoint.position.z; //transform.GetChild(3).transform.position.z;
+            obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().direction = -spawnPoint.right;
+            Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject,spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform); 
            
-        //    Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject, new Vector3(x,y,z), Quaternion.identity, transform); 
-            //obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().dir = transform.GetChild(3).transform.right;
-        //    obstacle_pos_x = x;
-        //    obstacle_pos_y = 1.0f;
-        //    obstacle_pos_z = z;
-        //}
+            obstacle_pos_x = x;
+            obstacle_pos_y = 1.0f;
+            obstacle_pos_z = z;
+        }
         else
         {
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &312677605335389156
+--- !u!1 &2080047649433074085
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 306841694968575988}
-  - component: {fileID: 298798758036718318}
-  - component: {fileID: 288708530605364418}
-  - component: {fileID: 4991231510016305261}
-  - component: {fileID: 539810145776066800}
+  - component: {fileID: 2078106538324436071}
+  - component: {fileID: 2066032029934656421}
+  - component: {fileID: 2057446675621540805}
+  - component: {fileID: 6356875469637743306}
+  - component: {fileID: 6991910290134795592}
   m_Layer: 0
-  m_Name: Moving_WoodenWheel
+  m_Name: Barrel
   m_TagString: MovingObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &306841694968575988
+--- !u!4 &2078106538324436071
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312677605335389156}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_GameObject: {fileID: 2080047649433074085}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 60, y: 60, z: 60}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &298798758036718318
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!33 &2066032029934656421
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312677605335389156}
-  m_Mesh: {fileID: 4300000, guid: 68af6c02562b045448432aed1e01b819, type: 3}
---- !u!23 &288708530605364418
+  m_GameObject: {fileID: 2080047649433074085}
+  m_Mesh: {fileID: 4300000, guid: d4fdbb823575e6843a51c73cd6f70d91, type: 3}
+--- !u!23 &2057446675621540805
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312677605335389156}
+  m_GameObject: {fileID: 2080047649433074085}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -81,32 +81,30 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &4991231510016305261
-CapsuleCollider:
+--- !u!65 &6356875469637743306
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312677605335389156}
+  m_GameObject: {fileID: 2080047649433074085}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.06
-  m_Height: 0.37
-  m_Direction: 0
-  m_Center: {x: 0, y: 0.07512326, z: 0}
---- !u!114 &539810145776066800
+  serializedVersion: 2
+  m_Size: {x: 0.07, y: 0.072101, z: 0.07}
+  m_Center: {x: 0, y: 0.0360505, z: 0}
+--- !u!114 &6991910290134795592
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 312677605335389156}
+  m_GameObject: {fileID: 2080047649433074085}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b8a859d690f31a4ea1e2da5c7817d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: {x: 0, y: 0, z: 0}
-  speed: 50
-  pos: 0
+  speed: 0
+  direction: {x: 0, y: 0, z: 0}

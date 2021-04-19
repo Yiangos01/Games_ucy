@@ -1759,6 +1759,7 @@ MonoBehaviour:
   spawnChickenWalk: {fileID: 4021731214566511899, guid: cac8cde82dfbfbc46935200ab163d261,
     type: 3}
   isStart: 0
+  isBarn: 0
 --- !u!1 &1590807719
 GameObject:
   m_ObjectHideFlags: 0

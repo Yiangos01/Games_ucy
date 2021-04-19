@@ -28,6 +28,7 @@ TagManager:
   - Wall
   - RotatingObstacle
   - MovingObstacle
+  - finishText
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,12 @@ TagManager:
   - watermalon
   - Potion
   - Wall
+<<<<<<< HEAD
   - finishText
+=======
+  - RotatingObstacle
+  - MovingObstacle
+>>>>>>> d1bf7d6556ff4fbc005b39c07331ddc7c8cd24c8
   layers:
   - Default
   - TransparentFX

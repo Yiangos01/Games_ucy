@@ -206,44 +206,73 @@ public class GroundTile : MonoBehaviour
     }
     void SpawnObstacle ()
     {
-        // Choose obstacle type
-        int obstacleType = Random.Range(0, 5);
 
-        // Choose a randompoint to spawn the obstacle
-        int obstacleOffset = Random.Range(-16, 16);
-        Transform spawnPoint = transform.GetChild(3).transform;
-        float z = spawnPoint.position.z;
-        z = z + obstacleOffset;
-        float x = spawnPoint.position.x;
-        x = x - obstacleOffset;
-        Vector3 obstaclePosition = new Vector3(x, spawnPoint.position.y, z);
+        //Choose if spawn a moving obstacle-less chance
+         int moving = Random.Range(0, 5);
+        //int moving = 1;
+        if (moving < 1) {
+            Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
+            obstacle_pos_x = transform.GetChild(3).transform.position.x;
+            obstacle_pos_y = 1.0f;
+            obstacle_pos_z = transform.GetChild(3).transform.position.z;
 
-        //Choose randomly a rotation for the obstacle
-        Quaternion rotation;// = Quaternion.LookRotation(spawnPoint.forward);
-        if (obstacleType == 2)//Wheel Barrow orientation
+        }
+        //if (moving == 1)
+        //{
+        //    float x = transform.GetChild(3).transform.position.x;
+        //    float y = transform.GetChild(3).transform.position.y;
+        //    float z = transform.GetChild(3).transform.position.z;
+           
+        //    Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject, new Vector3(x,y,z), Quaternion.identity, transform); 
+            //obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().dir = transform.GetChild(3).transform.right;
+        //    obstacle_pos_x = x;
+        //    obstacle_pos_y = 1.0f;
+        //    obstacle_pos_z = z;
+        //}
+        else
         {
-            int frequency = Random.Range(0, 3);
-            if (frequency == 0)
-                rotation = Quaternion.LookRotation(spawnPoint.forward);
-            else if (frequency == 1)
-                rotation = Quaternion.LookRotation(-spawnPoint.right);
-            else
-                rotation = Quaternion.LookRotation(-spawnPoint.forward);
-        }
-        else {
-            int frequency = Random.Range(0, 2);
-            if (frequency == 0)
-                rotation = Quaternion.LookRotation(spawnPoint.forward);
-            else 
-                rotation = Quaternion.LookRotation(-spawnPoint.right);
-        }
-        
 
-        // spawnPoint.position.x = spawnPoint.position.x + 0.1f;
-        // Spawn the obstacle at the position
-        Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
-        obstacle_pos_x = x;
-        obstacle_pos_y = 0.5f;
-        obstacle_pos_z = z;
+            // Choose obstacle type
+            int obstacleType = Random.Range(0, 5);
+
+            // Choose a randompoint to spawn the obstacle
+            int obstacleOffset = Random.Range(-16, 16);
+            Transform spawnPoint = transform.GetChild(3).transform;
+            float z = spawnPoint.position.z;
+            z = z + obstacleOffset;
+            float x = spawnPoint.position.x;
+            x = x - obstacleOffset;
+            Vector3 obstaclePosition = new Vector3(x, spawnPoint.position.y, z);
+
+            //Choose randomly a rotation for the obstacle
+            Quaternion rotation;// = Quaternion.LookRotation(spawnPoint.forward);
+            if (obstacleType == 2)//Wheel Barrow orientation
+            {
+                int frequency = Random.Range(0, 3);
+                if (frequency == 0)
+                    rotation = Quaternion.LookRotation(spawnPoint.forward);
+                else if (frequency == 1)
+                    rotation = Quaternion.LookRotation(-spawnPoint.right);
+                else
+                    rotation = Quaternion.LookRotation(-spawnPoint.forward);
+            }
+            else
+            {
+                int frequency = Random.Range(0, 2);
+                if (frequency == 0)
+                    rotation = Quaternion.LookRotation(spawnPoint.forward);
+                else
+                    rotation = Quaternion.LookRotation(-spawnPoint.right);
+            }
+
+
+            // spawnPoint.position.x = spawnPoint.position.x + 0.1f;
+            // Spawn the obstacle at the position
+            Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
+            obstacle_pos_x = x;
+            obstacle_pos_y = 1f;
+            obstacle_pos_z = z;
+        }
     }
+    
 }

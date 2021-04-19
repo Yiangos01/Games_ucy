@@ -19,11 +19,16 @@ public class ChickenStatus : MonoBehaviour
     public ParticleSystem particles;
     public float strengthDuration;
     float strStart;
+
     public GameObject chickenBody;
+    public GameObject chickenWings;
+    public GameObject chickenThigs;
     //public GameObject uiFinish;
     public Color strengthColor;
     private Color originalColor;
-    SkinnedMeshRenderer chk_renderer;
+    SkinnedMeshRenderer chk_rendererBD;
+    SkinnedMeshRenderer chk_rendererWG;
+    SkinnedMeshRenderer chk_rendererTH;
     public int patternSize;
     public GameObject gameOverText;
 
@@ -34,12 +39,15 @@ public class ChickenStatus : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+      
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         createTargetPattern();
 
         // Access chicken's body color
-        chk_renderer = chickenBody.GetComponent<SkinnedMeshRenderer>();
-        originalColor = chk_renderer.material.color;
+        chk_rendererBD = chickenBody.GetComponent<SkinnedMeshRenderer>();
+        chk_rendererWG = chickenWings.GetComponent<SkinnedMeshRenderer>();
+        chk_rendererTH = chickenThigs.GetComponent<SkinnedMeshRenderer>();
+        originalColor = chk_rendererBD.material.color;
 
 
     }
@@ -115,7 +123,9 @@ public class ChickenStatus : MonoBehaviour
                 strStart = Time.time;
                 strengthMode = true;
                 // Change Color
-                chk_renderer.material.color = strengthColor;
+                chk_rendererBD.material.color = strengthColor;
+                chk_rendererWG.material.color = strengthColor;
+                chk_rendererTH.material.color = strengthColor;
                 Debug.Log("Pattern completed");
                 Debug.Log("Create new pattern");
                 pattern.Clear();
@@ -131,13 +141,13 @@ public class ChickenStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
 
-            
+
             // Debug.Log(Fruits.Materials);
             Destroy(other.gameObject);
             updatePattern(other.gameObject.name);
             food++;
             //Debug.Log("food " + food);
-           
+
         }
 
         if (other.gameObject.CompareTag("GoldenEgg"))
@@ -146,21 +156,21 @@ public class ChickenStatus : MonoBehaviour
             goldenEgg++;
             Debug.Log("Golden Egg " + goldenEgg);
             //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
-            if (goldenEgg == 2) {
+            if (goldenEgg == 1) {
+              //  groundSpawner.IsBarn = true;
                 groundSpawner.SpawnBarn();
+
                 // Display ending Animation
             }
 
         }
-        //if (other.gameObject.CompareTag("Barn"))
-        //{
-         //   Destroy(other.gameObject);
-          //  uiFinish.SetActive(true);
-            // Stops
+        if (other.gameObject.CompareTag("Barn"))
+        {
 
-            // groundSpawner.SpawnChickens();
 
-        //}
+            groundSpawner.SpawnChickens();
+
+        }
         if (other.gameObject.CompareTag("Potion"))
         {
 
@@ -173,8 +183,22 @@ public class ChickenStatus : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-
+        
     }
+
+    //Function for blinking the object when hit a moving object
+    private IEnumerator Blink()
+    {
+            transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+            transform.GetChild(0).gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+    }
+
     private void OnCollisionEnter(Collision collision)
 
     {
@@ -204,8 +228,17 @@ public class ChickenStatus : MonoBehaviour
 
             
         }
-        
-        
+        if (collision.gameObject.CompareTag("RotatingObstacle"))//The object blinks-flickers when hit moving objects
+        {
+            if (!strengthMode)
+            {
+                heart--;
+                StartCoroutine(Blink());
+            }
+
+        }
+
+
     }
     // Update is called once per frame
     void Update()
@@ -217,10 +250,13 @@ public class ChickenStatus : MonoBehaviour
             isHit = false;//Dizzy animation has stopped playing
       
         // If strength expire tranform chicken to its original form
-        if (Time.time - strStart > strengthDuration && strengthMode)
-        {
+        if (Time.time - strStart > strengthDuration && strengthMode) {
+   
+            StartCoroutine(Blink());//Blink to show that your strength mode is ending
             strengthMode = false;
-            chk_renderer.material.color = originalColor;
+            chk_rendererBD.material.color = originalColor;
+            chk_rendererWG.material.color = originalColor;
+            chk_rendererTH.material.color = originalColor;
         }
     }
 }

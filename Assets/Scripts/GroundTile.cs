@@ -14,24 +14,29 @@ public class GroundTile : MonoBehaviour
     float obstacle_pos_y;
     float obstacle_pos_z;
     public float threshold_dist;
+    public bool barn = false;//If spawn barn is true
 
     // Start is called before the first frame update
     void Start()
     {
-     
-        groundSpawner = GameObject.FindObjectOfType<GroundSpawner>(); 
-        if(!groundSpawner.isStart)//At the start of the game don't spawn obstacles
-            SpawnObstacle();
-        //Always spawn decor and fruits
+        //Always spawn decor
+        groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         SpawnTrees();
-        SpawnFruits();
-        //Spawn eggs less frequent-0.33 chance
-        int frequencyEgg = Random.Range(0, 10);
-        int frequencyPotion = Random.Range(0, 20);
-        if (frequencyEgg<1)
-            SpawnGoldenEggs();
-        if (frequencyPotion <1)
-            SpawnPotion();
+        if (!barn) {//If not spawn barn
+            if (!groundSpawner.isStart)
+            {//At the start of the game don't spawn obstacles
+                SpawnObstacle();
+            }
+        
+            SpawnFruits();
+            //Spawn eggs less frequent-0.33 chance
+            int frequencyEgg = Random.Range(0, 2);
+            int frequencyPotion = Random.Range(0, 20);
+            if (frequencyEgg < 1)
+                SpawnGoldenEggs();
+            if (frequencyPotion < 1)
+                SpawnPotion();
+    }
     }
 
     void OnTriggerExit (Collider other)

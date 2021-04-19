@@ -9,6 +9,10 @@ public class GroundSpawner : MonoBehaviour
     public GameObject rightTile;
     public GameObject barn;
     public GameObject lake;
+    public GameObject spawnChickenRun;
+    public GameObject spawnChickenWalk;
+    Vector3 barnPos;
+    Vector3 barnFor;
     public bool isStart = false;
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
@@ -76,11 +80,38 @@ public class GroundSpawner : MonoBehaviour
         GameObject temp = Instantiate(barn, nextSpawnPoint, Quaternion.LookRotation(-Vector3.forward));
         temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
 
+        barnPos = temp.transform.position;
+        barnFor = temp.transform.forward;
+
     }
     //Spawn Chickens when reached the barn
-    //public void SpawnChickens() 
-    //{ 
-    //}
+    public void SpawnChickens() 
+    {
+        GameObject temp = Instantiate(spawnChickenRun, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp1 = Instantiate(spawnChickenWalk, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp1.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp2 = Instantiate(spawnChickenRun, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp2.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp3 = Instantiate(spawnChickenWalk, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp3.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp4 = Instantiate(spawnChickenRun, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp4.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp5 = Instantiate(spawnChickenWalk, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp5.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp6 = Instantiate(spawnChickenRun, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp6.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+        GameObject temp7 = Instantiate(spawnChickenWalk, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
+        temp7.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
+
+        Destroy(temp, 10);
+        Destroy(temp1, 10);
+        Destroy(temp2, 10);
+        Destroy(temp3, 10);
+        Destroy(temp4, 10);
+        Destroy(temp5, 10);
+        Destroy(temp6, 10);
+    }
 
     public void SpawnLake() {
         GameObject temp = Instantiate(lake, new Vector3(nextSpawnPoint.x, 0.8f, nextSpawnPoint.z), Quaternion.identity);
@@ -89,7 +120,7 @@ public class GroundSpawner : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        
+       
         global_rotation = new Vector3(0, 0, 0);
         for (int i =0; i < 4; i++)
         {  

@@ -1754,6 +1754,10 @@ MonoBehaviour:
     type: 3}
   barn: {fileID: 4171711223200907344, guid: 5b402e6a9c88a9241989b01514b3c3a8, type: 3}
   lake: {fileID: 3363635681877419202, guid: d4034bcb5639a6e49a53f77be1646df3, type: 3}
+  spawnChickenRun: {fileID: 2628559278042429503, guid: 1b039db840f05eb4d95785ce094d1008,
+    type: 3}
+  spawnChickenWalk: {fileID: 4021731214566511899, guid: cac8cde82dfbfbc46935200ab163d261,
+    type: 3}
   isStart: 0
 --- !u!1 &1590807719
 GameObject:

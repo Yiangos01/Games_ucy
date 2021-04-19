@@ -14,13 +14,14 @@ public class GroundTile : MonoBehaviour
     float obstacle_pos_y;
     float obstacle_pos_z;
     public float threshold_dist;
-    public bool barn = false;//If spawn barn is true
+    bool barn;//If spawn barn is true
 
     // Start is called before the first frame update
     void Start()
     {
         //Always spawn decor
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        barn = groundSpawner.isBarn;
         SpawnTrees();
         if (!barn) {//If not spawn barn
             if (!groundSpawner.isStart)

@@ -16,6 +16,7 @@ public class GroundSpawner : MonoBehaviour
     public bool isStart = false;
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
+    public bool isBarn = false;
 
     public void SpawnTile()
     {
@@ -77,6 +78,7 @@ public class GroundSpawner : MonoBehaviour
 
     }
     public void SpawnBarn() {
+        isBarn = true;
         GameObject temp = Instantiate(barn, nextSpawnPoint, Quaternion.LookRotation(-Vector3.forward));
         temp.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
 

@@ -8,7 +8,6 @@ public class ChickenStatus : MonoBehaviour
     [SerializeField] public int heart = 10;
     [SerializeField] public int goldenEgg = 0;
     GroundSpawner groundSpawner;
-    GroundTile groundTile;
     protected Animator animator;
     public bool isHit;
     protected ChickenMovement chMv;
@@ -40,7 +39,7 @@ public class ChickenStatus : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-        groundTile = GameObject.FindObjectOfType<GroundTile>();
+      
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         createTargetPattern();
 
@@ -158,7 +157,7 @@ public class ChickenStatus : MonoBehaviour
             Debug.Log("Golden Egg " + goldenEgg);
             //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
             if (goldenEgg == 1) {
-                groundTile.barn = true;
+              //  groundSpawner.IsBarn = true;
                 groundSpawner.SpawnBarn();
 
                 // Display ending Animation

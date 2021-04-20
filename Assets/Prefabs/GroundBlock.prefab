@@ -78,7 +78,11 @@ MonoBehaviour:
     type: 3}
   potionPrefab: {fileID: 8375638798181806747, guid: 23a3b1d93c5d9554e93e18a070748a4b,
     type: 3}
+  obstacle_pos_x: []
+  obstacle_pos_y: []
+  obstacle_pos_z: []
   threshold_dist: 6
+  hardMode: 1
 --- !u!1 &968130799246889510
 GameObject:
   m_ObjectHideFlags: 0

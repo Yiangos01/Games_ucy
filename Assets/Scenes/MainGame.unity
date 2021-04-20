@@ -1760,6 +1760,10 @@ MonoBehaviour:
     type: 3}
   isStart: 0
   isBarn: 0
+  patienceRight: 3
+  patienceLeft: 3
+  probStraightTile: 10
+  probTurnTile: 10
 --- !u!1 &1590807719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,7 +3594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: 0
-  heart: 5
+  heart: 2
   goldenEgg: 0
   isHit: 0
   pattern: 

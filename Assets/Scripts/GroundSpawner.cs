@@ -17,23 +17,49 @@ public class GroundSpawner : MonoBehaviour
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
     public bool isBarn = false;
+    public int patienceRight;
+    public int patienceLeft;
+    int countRight;
+    int countLeft;
+    public int probStraightTile;
+    public int probTurnTile;
+    //public int probStraightTile;
 
     public void SpawnTile()
     {
-        int tile = Random.Range(0, 20);
+        int tile = Random.Range(0, probStraightTile+probTurnTile*2);
+        
+        countLeft += 1;
+        countRight += 1;
 
-        if (tile < 16)
+        if (tile < probStraightTile)
         {
             SpawnStraightTile();
         }
-        else if (tile < 18)
+        else if (tile < probStraightTile+ probTurnTile)
         {
-            SpawnRightTile();
+            if (countRight >= patienceRight)
+            {
+                SpawnRightTile();
+                countRight = 0;
+            }
+            else
+            {
+                SpawnStraightTile();
+            }
             //SpawnStraightTile();
         }
-        else if (tile <= 20)
+        else
         {
-            SpawnLeftTile();
+            if (countLeft >= patienceLeft)
+            {
+                SpawnLeftTile();
+                countLeft = 0;
+            }
+            else
+            {
+                SpawnStraightTile();
+            }
             //SpawnStraightTile();
         }
 
@@ -137,8 +163,8 @@ public class GroundSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         isStart = false;
     }
-
 
 }

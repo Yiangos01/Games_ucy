@@ -3,32 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - East
-  - West
-  - North
-  - Food
-  - South
-  - Right
-  - Left
-  - NextSpawn
-  - Obstacle
-  - CameraCollider
-  - GoldenEgg
-  - Barn
-  - Wave
-  - apple
-  - banana
-  - carrot
-  - cherry
-  - grape
-  - pumpking
-  - watermalon
-  - Potion
-  - Wall
-  - RotatingObstacle
-  - MovingObstacle
-  - finishText
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -38,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - Track
+  - 
   - 
   - 
   - 

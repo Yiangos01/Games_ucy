@@ -10,34 +10,64 @@ public class GroundTile : MonoBehaviour
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
     public GameObject potionPrefab;
-    float obstacle_pos_x;
-    float obstacle_pos_y;
-    float obstacle_pos_z;
+    public List<float> obstacle_pos_x;
+    public List<float> obstacle_pos_y;
+    public List<float> obstacle_pos_z;
     public float threshold_dist;
     bool barn;//If spawn barn is true
+    public bool hardMode;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start first line");
         //Always spawn decor
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         barn = groundSpawner.isBarn;
         SpawnTrees();
+
         if (!barn) {//If not spawn barn
             if (!groundSpawner.isStart)
             {//At the start of the game don't spawn obstacles
-                SpawnObstacle();
+             //Choose if spawn a moving obstacle-less chance
+                int moving = Random.Range(0, 5);
+                if (hardMode)
+                {
+                    // Avoid creating moving and stationary obstacle
+                    if (moving < 1)
+                    {
+                        SpawnObstacle(true);
+                    }
+                    else
+                    {
+                        SpawnObstacle(false);
+                        SpawnObstacle(false);
+                    }
+                }
+                else
+                {
+                    SpawnObstacle(moving < 1);
+                }
             }
         
-            SpawnFruits();
+            // Spawn only one type of object on a single tile
+           
             //Spawn eggs less frequent-0.33 chance
-            int frequencyEgg = Random.Range(0, 5);
+           
+            int frequencyEgg = Random.Range(0, 3);
             int frequencyPotion = Random.Range(0, 20);
             if (frequencyEgg < 1)
+            {
                 SpawnGoldenEggs();
+            }
             if (frequencyPotion < 1)
+            {
                 SpawnPotion();
-    }
+            }
+            
+            SpawnFruits();
+           
+        }
     }
 
     void OnTriggerExit (Collider other)
@@ -59,7 +89,7 @@ public class GroundTile : MonoBehaviour
     //void Update(){}
 
    
-    void SpawnTrees() { 
+    void SpawnTrees() {
         // Choose random decor to fill decor positions
         // 1
         Transform DecorPoint = transform.GetChild(4).transform;
@@ -78,9 +108,10 @@ public class GroundTile : MonoBehaviour
         decorType = Random.Range(0, 9);
         Instantiate(treesPrefab.transform.GetChild(decorType).gameObject, DecorPoint.position, Quaternion.identity, transform);
     }
-    void SpawnFruits() {
+    void SpawnFruits()
+    {
         // Choose fruit type
-        
+
         float z;
         float x;
         float y;
@@ -98,35 +129,76 @@ public class GroundTile : MonoBehaviour
         Vector3 fruitPosition = new Vector3(x, y, z);
 
         // Avoid Collision with obstacles
-        float diff_x;
-        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x)); 
-        if (diff_x > threshold_dist)
+        bool deploy = true;
+        foreach (float ob_x in obstacle_pos_x)
+        {
+            
+            Debug.Log("in for loop");
+            float diff_x;
+            diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
+            if (diff_x <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
-        
-        float diff_y;
-        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
-        if (diff_y > threshold_dist)
+
+        deploy = true;
+        foreach (float ob_y in obstacle_pos_y)
+        {
+            float diff_y;
+            diff_y = Mathf.Abs(Mathf.Abs(ob_y) - Mathf.Abs(y));
+            if (diff_y <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
-        
-        float diff_z;
-        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
-        if (diff_z > threshold_dist)
+
+        deploy = true;
+        foreach (float ob_z in obstacle_pos_z)
+        {
+           float diff_z;
+           diff_z = Mathf.Abs(Mathf.Abs(ob_z) - Mathf.Abs(z));
+           if (diff_z <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(fruitsPrefab.transform.GetChild(fruitType).gameObject, fruitPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
     }
-    void SpawnPotion() {
+
+    void SpawnPotion()
+    {
         float z;
         float x;
         float y;
+
         // Choose a random point to spawn fruit
         int potionOffset = Random.Range(-16, 16);
         int potionOffsetY = Random.Range(0, 5);
@@ -141,30 +213,73 @@ public class GroundTile : MonoBehaviour
         Vector3 potionPosition = new Vector3(x, y, z);
 
         // Avoid Collision with obstacles
-        float diff_x;
-        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x));
-        if (diff_x > threshold_dist)
+        bool deploy = true;
+        foreach (float ob_x in obstacle_pos_x)
+        {
+
+            Debug.Log("in for loop");
+            float diff_x;
+            diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
+            if (diff_x <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
-        float diff_y;
-        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
-        if (diff_y > threshold_dist)
+        deploy = true;
+        foreach (float ob_y in obstacle_pos_y)
+        {
+            float diff_y;
+            diff_y = Mathf.Abs(Mathf.Abs(ob_y) - Mathf.Abs(y));
+            if (diff_y <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
-        float diff_z;
-        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
-        if (diff_z > threshold_dist)
+        deploy = true;
+        foreach (float ob_z in obstacle_pos_z)
+        {
+            float diff_z;
+            diff_z = Mathf.Abs(Mathf.Abs(ob_z) - Mathf.Abs(z));
+            if (diff_z <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(potionPrefab.transform.gameObject, potionPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
+
+
+
+        
     }
+
     void SpawnGoldenEggs()
     {
         float z;
@@ -183,45 +298,89 @@ public class GroundTile : MonoBehaviour
 
         Vector3 goldenEggPosition = new Vector3(x, y, z);
 
-        // Avoid Collision with obstacles
-        float diff_x;
-        diff_x = Mathf.Abs(Mathf.Abs(obstacle_pos_x) - Mathf.Abs(x));
-        if (diff_x > threshold_dist)
+        // Avoid Collision with other objects
+        bool deploy = true;
+        foreach (float ob_x in obstacle_pos_x)
+        {
+
+            Debug.Log("in for loop");
+            float diff_x;
+            diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
+            if (diff_x <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
-        float diff_y;
-        diff_y = Mathf.Abs(Mathf.Abs(obstacle_pos_y) - Mathf.Abs(y));
-        if (diff_y > threshold_dist)
+        deploy = true;
+        foreach (float ob_y in obstacle_pos_y)
+        {
+            float diff_y;
+            diff_y = Mathf.Abs(Mathf.Abs(ob_y) - Mathf.Abs(y));
+            if (diff_y <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
-        float diff_z;
-        diff_z = Mathf.Abs(Mathf.Abs(obstacle_pos_z) - Mathf.Abs(z));
-        if (diff_z > threshold_dist)
+        deploy = true;
+        foreach (float ob_z in obstacle_pos_z)
+        {
+            float diff_z;
+            diff_z = Mathf.Abs(Mathf.Abs(ob_z) - Mathf.Abs(z));
+            if (diff_z <= threshold_dist)
+            {
+                deploy = false;
+                break;
+            }
+        }
+        if (deploy)
         {
             Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(y);
+            obstacle_pos_z.Add(z);
             return;
         }
 
-        
     }
-    void SpawnObstacle ()
+
+    void SpawnObstacle (bool moving)
     {
 
         //Choose if spawn a moving obstacle-less chance
         int moving = Random.Range(0, 5);
         
         if (moving < 1) {
+        
+        //int moving = 1;
+       
             Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
-            obstacle_pos_x = transform.GetChild(3).transform.position.x;
-            obstacle_pos_y = 1.0f;
-            obstacle_pos_z = transform.GetChild(3).transform.position.z;
+            float x = transform.GetChild(3).transform.position.x;
 
+            float z = transform.GetChild(3).transform.position.z;
+            obstacle_pos_x.Add(x);
+            obstacle_pos_y.Add(1f);
+            obstacle_pos_z.Add(z);
+            
         }
         else if (moving == 1)
         {
@@ -232,9 +391,9 @@ public class GroundTile : MonoBehaviour
             obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().direction = -spawnPoint.right;
             Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject,spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform); 
            
-            obstacle_pos_x = x;
-            obstacle_pos_y = 1.0f;
-            obstacle_pos_z = z;
+            obstacle_pos_x = Add(x);
+            obstacle_pos_y = Add(1.0f);
+            obstacle_pos_z = Add(z);
         }
         else
         {
@@ -272,13 +431,71 @@ public class GroundTile : MonoBehaviour
                     rotation = Quaternion.LookRotation(-spawnPoint.right);
             }
 
+            bool deploy = true;
+            foreach (float ob_x in obstacle_pos_x)
+            {
+
+                Debug.Log("in for loop");
+                float diff_x;
+                diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
+                if (diff_x <= threshold_dist)
+                {
+                    deploy = false;
+                    break;
+                }
+            }
+            if (deploy)
+            {
+                Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
+                obstacle_pos_x.Add(x);
+                obstacle_pos_y.Add(1f);
+                obstacle_pos_z.Add(z);
+                return;
+            }
+
+            deploy = true;
+            foreach (float ob_y in obstacle_pos_y)
+            {
+                float diff_y;
+                diff_y = Mathf.Abs(Mathf.Abs(ob_y) - Mathf.Abs(1f));
+                if (diff_y <= threshold_dist)
+                {
+                    deploy = false;
+                    break;
+                }
+            }
+            if (deploy)
+            {
+                Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
+                obstacle_pos_x.Add(x);
+                obstacle_pos_y.Add(1f);
+                obstacle_pos_z.Add(z);
+                return;
+            }
+
+            deploy = true;
+            foreach (float ob_z in obstacle_pos_z)
+            {
+                float diff_z;
+                diff_z = Mathf.Abs(Mathf.Abs(ob_z) - Mathf.Abs(z));
+                if (diff_z <= threshold_dist)
+                {
+                    deploy = false;
+                    break;
+                }
+            }
+            if (deploy)
+            {
+                Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
+                obstacle_pos_x.Add(x);
+                obstacle_pos_y.Add(1f);
+                obstacle_pos_z.Add(z);
+                return;
+            }
 
             // spawnPoint.position.x = spawnPoint.position.x + 0.1f;
             // Spawn the obstacle at the position
-            Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
-            obstacle_pos_x = x;
-            obstacle_pos_y = 1f;
-            obstacle_pos_z = z;
+            //Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
         }
     }
     

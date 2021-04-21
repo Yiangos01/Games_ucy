@@ -10,6 +10,8 @@ public class GroundTile : MonoBehaviour
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
     public GameObject potionPrefab;
+    GameObject player;
+    ParticleSystem fog;
     public List<float> obstacle_pos_x;
     public List<float> obstacle_pos_y;
     public List<float> obstacle_pos_z;
@@ -19,10 +21,12 @@ public class GroundTile : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
         Debug.Log("Start first line");
         //Always spawn decor
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        fog = transform.GetChild(11).GetComponent<ParticleSystem>();
         barn = groundSpawner.isBarn;
         SpawnTrees();
 
@@ -49,12 +53,16 @@ public class GroundTile : MonoBehaviour
                     SpawnObstacle(moving < 1);
                 }
             }
-        
+
+            if (groundSpawner.isStart)
+            {
+                transform.GetChild(11).gameObject.SetActive(false);
+            }
             // Spawn only one type of object on a single tile
-           
+
             //Spawn eggs less frequent-0.33 chance
-           
-            int frequencyEgg = Random.Range(0, 3);
+
+            int frequencyEgg = Random.Range(0, 20);
             int frequencyPotion = Random.Range(0, 20);
             if (frequencyEgg < 1)
             {
@@ -366,36 +374,41 @@ public class GroundTile : MonoBehaviour
     void SpawnObstacle (bool moving)
     {
 
-        //Choose if spawn a moving obstacle-less chance
-        int moving = Random.Range(0, 5);
-        
-        if (moving < 1) {
-        
-        //int moving = 1;
        
-            Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
-            float x = transform.GetChild(3).transform.position.x;
+       
+        if (moving)
+        
+        { //Choose type of moving obstacle
+            int chooseMovingType = Random.Range(0, 2);
+            if (chooseMovingType < 1)//Rotating obstacle
+            {
 
-            float z = transform.GetChild(3).transform.position.z;
-            obstacle_pos_x.Add(x);
-            obstacle_pos_y.Add(1f);
-            obstacle_pos_z.Add(z);
-            
+                //int moving = 1;
+
+                Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
+                float x = transform.GetChild(3).transform.position.x;
+
+                float z = transform.GetChild(3).transform.position.z;
+                obstacle_pos_x.Add(x);
+                obstacle_pos_y.Add(1f);
+                obstacle_pos_z.Add(z);
+
+            }
+            else//Moving Back and forth obstacle
+            {
+                Transform spawnPoint = transform.GetChild(3).transform;
+                float x = spawnPoint.position.x;//transform.GetChild(3).transform.position.x;
+                float y = spawnPoint.position.y;
+                float z = spawnPoint.position.z; //transform.GetChild(3).transform.position.z;
+                obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().direction = -spawnPoint.right;
+                Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject, spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform);
+
+                obstacle_pos_x.Add(x);
+                obstacle_pos_y.Add(1.0f);
+                obstacle_pos_z.Add(z);
+            }
         }
-        else if (moving == 1)
-        {
-            Transform spawnPoint = transform.GetChild(3).transform;
-            float x = spawnPoint.position.x;//transform.GetChild(3).transform.position.x;
-            float y = spawnPoint.position.y;
-            float z = spawnPoint.position.z; //transform.GetChild(3).transform.position.z;
-            obstaclesPrefab.transform.GetChild(6).gameObject.GetComponent<MovingObstacle>().direction = -spawnPoint.right;
-            Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject,spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform); 
-           
-            obstacle_pos_x = Add(x);
-            obstacle_pos_y = Add(1.0f);
-            obstacle_pos_z = Add(z);
-        }
-        else
+        else//Stationary obstacle
         {
 
             // Choose obstacle type
@@ -497,6 +510,12 @@ public class GroundTile : MonoBehaviour
             // Spawn the obstacle at the position
             //Instantiate(obstaclesPrefab.transform.GetChild(obstacleType).gameObject, obstaclePosition, rotation, transform);
         }
+    }
+    void Update() {
+        Vector3 dist = transform.position - player.transform.position;
+        if(fog!=null)
+            if (dist.magnitude <= 280f && fog.isPlaying)
+                fog.Stop();
     }
     
 }

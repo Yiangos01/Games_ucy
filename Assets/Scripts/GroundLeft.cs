@@ -9,35 +9,40 @@ public class GroundLeft : MonoBehaviour
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
-    
+    GameObject player;
+    ParticleSystem fog;
     // Start is called before the first frame update
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        fog = transform.GetChild(16).GetComponent<ParticleSystem>();
         //SpawnObstacle();
         SpawnTrees();
         SpawnFruits();
 
-        int frequencyLake = Random.Range(0, 20);
-        if (frequencyLake < 1)
-            groundSpawner.SpawnLake();
+        //int frequencyLake = Random.Range(0, 20);
+       // if (frequencyLake < 1)
+          //  groundSpawner.SpawnLake();
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")//If player exits
             groundSpawner.SpawnTile();
-       // if (other.gameObject.tag == "CameraCollider")//If camera exits
-       // {
-       //     Destroy(gameObject, 4);
-       // }
+      
 
     }
     // Update is called once per frame
     void Update()
     {
+        Vector3 dist = transform.position - player.transform.position;
 
+        if(fog!=null)
+            if (dist.magnitude <= 150f && fog.isPlaying)
+            {
+                transform.GetChild(16).GetComponent<ParticleSystem>().Stop();
+            }
     }
 
     

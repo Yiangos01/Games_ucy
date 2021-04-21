@@ -178,12 +178,15 @@ public class ChickenStatus : MonoBehaviour
             heart++;
 
         }
+        
+
+        
+    }
+    private void OnTriggeredExit(Collider other) {
         if (other.gameObject.CompareTag("Wave"))
         {
             Destroy(other.gameObject);
         }
-
-        
     }
 
     //Function for blinking the object when hit a moving object

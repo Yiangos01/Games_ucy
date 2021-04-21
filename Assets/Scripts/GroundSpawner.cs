@@ -17,12 +17,13 @@ public class GroundSpawner : MonoBehaviour
     Vector3 nextSpawnPoint;
     Vector3 global_rotation;
     public bool isBarn = false;
-    public int patienceRight;
-    public int patienceLeft;
+    public int patienceRight = 4;
+    public int patienceLeft = 4;
     int countRight;
     int countLeft;
-    public int probStraightTile;
-    public int probTurnTile;
+    public int probStraightTile = 10;
+    public int probTurnTile = 5;
+    public ParticleSystem GroundFog;
     //public int probStraightTile;
 
     public void SpawnTile()

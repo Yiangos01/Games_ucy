@@ -9,10 +9,14 @@ public class GroundRight : MonoBehaviour
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
+    GameObject player;
+    ParticleSystem fog;
     // Start is called before the first frame update
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        fog = transform.GetChild(16).GetComponent<ParticleSystem>();
         SpawnTrees();
         SpawnFruits();
         //SpawnObstacle();
@@ -22,16 +26,18 @@ public class GroundRight : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")//If player exits
             groundSpawner.SpawnTile();
-        //if (other.gameObject.tag == "CameraCollider")//If camera exits
-        //{
-        //    Destroy(gameObject, 4);
-        //}
+       
 
     }
     // Update is called once per frame
     void Update()
     {
-
+        
+            Vector3 dist = transform.position - player.transform.position;
+            if(fog!=null)
+              if (dist.magnitude <= 150f && fog.isPlaying)
+                   fog.Stop();
+        
     }
 
     

@@ -18,7 +18,7 @@ public class ChickenMovement : MonoBehaviour
     public GameObject chicken;
     public GameObject uiFinish;
     private bool canMove = true;
-
+    public GameObject initialfog;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +28,7 @@ public class ChickenMovement : MonoBehaviour
         col = GetComponent<SphereCollider>();
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>(); //GetComponent<Animator>();
         chSt = GetComponent<ChickenStatus>();
-        
+        initialfog.GetComponent<ParticleSystem>().Stop();
     }
 
     //Check if the player is grounded.

@@ -9,6 +9,7 @@ public class GroundTile : MonoBehaviour
     public GameObject treesPrefab;
     public GameObject fruitsPrefab;
     public GameObject goldenEggPrefab;
+    public GameObject goldenEggCratePrefab;
     public GameObject potionPrefab;
     GameObject player;
     ParticleSystem fog;
@@ -62,11 +63,12 @@ public class GroundTile : MonoBehaviour
 
             //Spawn eggs less frequent-0.33 chance
 
-            int frequencyEgg = Random.Range(0, 20);
+            int frequencyEgg = Random.Range(0, 3);
             int frequencyPotion = Random.Range(0, 20);
+            int frequencyCrateEgg = Random.Range(0, 3);
             if (frequencyEgg < 1)
             {
-                SpawnGoldenEggs();
+                SpawnGoldenEggs(frequencyCrateEgg<1);
             }
             if (frequencyPotion < 1)
             {
@@ -288,8 +290,9 @@ public class GroundTile : MonoBehaviour
         
     }
 
-    void SpawnGoldenEggs()
+    void SpawnGoldenEggs(bool isCrate)
     {
+        GameObject eggType;
         float z;
         float x;
         float y;
@@ -305,7 +308,15 @@ public class GroundTile : MonoBehaviour
         y = y + goldenEggOffsetY;
 
         Vector3 goldenEggPosition = new Vector3(x, y, z);
-
+        //Create egg with crate
+        if (isCrate)
+        {
+            eggType = goldenEggCratePrefab;
+        }
+        else
+        {
+            eggType = goldenEggPrefab;
+        }
         // Avoid Collision with other objects
         bool deploy = true;
         foreach (float ob_x in obstacle_pos_x)
@@ -322,7 +333,7 @@ public class GroundTile : MonoBehaviour
         }
         if (deploy)
         {
-            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            Instantiate(eggType.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
             obstacle_pos_x.Add(x);
             obstacle_pos_y.Add(y);
             obstacle_pos_z.Add(z);
@@ -342,7 +353,7 @@ public class GroundTile : MonoBehaviour
         }
         if (deploy)
         {
-            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            Instantiate(eggType.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
             obstacle_pos_x.Add(x);
             obstacle_pos_y.Add(y);
             obstacle_pos_z.Add(z);
@@ -362,7 +373,7 @@ public class GroundTile : MonoBehaviour
         }
         if (deploy)
         {
-            Instantiate(goldenEggPrefab.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
+            Instantiate(eggType.transform.gameObject, goldenEggPosition, Quaternion.identity, transform);
             obstacle_pos_x.Add(x);
             obstacle_pos_y.Add(y);
             obstacle_pos_z.Add(z);
@@ -382,15 +393,11 @@ public class GroundTile : MonoBehaviour
             int chooseMovingType = Random.Range(0, 2);
             if (chooseMovingType < 1)//Rotating obstacle
             {
-
-                //int moving = 1;
-
                 Instantiate(obstaclesPrefab.transform.GetChild(5).gameObject, transform.GetChild(3).transform.position, Quaternion.identity, transform);
                 float x = transform.GetChild(3).transform.position.x;
-
                 float z = transform.GetChild(3).transform.position.z;
                 obstacle_pos_x.Add(x);
-                obstacle_pos_y.Add(1f);
+                obstacle_pos_y.Add(1.5f);
                 obstacle_pos_z.Add(z);
 
             }
@@ -404,7 +411,7 @@ public class GroundTile : MonoBehaviour
                 Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject, spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform);
 
                 obstacle_pos_x.Add(x);
-                obstacle_pos_y.Add(1.0f);
+                obstacle_pos_y.Add(2f);
                 obstacle_pos_z.Add(z);
             }
         }

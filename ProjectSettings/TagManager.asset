@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - finishText
+  - CameraCollider
+  - Left
+  - Right
+  - Barn
+  - Wave
+  - GoldenEgg
+  - Potion
+  - Obstacle
+  - RotatingObstacle
+  - MovingObstacle
+  - Food
+  - Crate
+  - GoldenEggCrate
   layers:
   - Default
   - TransparentFX

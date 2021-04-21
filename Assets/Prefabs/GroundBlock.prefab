@@ -75,7 +75,9 @@ MonoBehaviour:
     type: 3}
   fruitsPrefab: {fileID: 354964166482784934, guid: 63c39e0c133969d429996d89f5fdb9f4,
     type: 3}
-  goldenEggPrefab: {fileID: 2737891649392059492, guid: bff807e5edade7a4ea631fa7bb758bc6,
+  goldenEggPrefab: {fileID: 5604047261193761953, guid: 8a13d2e3c212d9446b4820bb72cdb1e8,
+    type: 3}
+  goldenEggCratePrefab: {fileID: 2737891649392059492, guid: bff807e5edade7a4ea631fa7bb758bc6,
     type: 3}
   potionPrefab: {fileID: 8375638798181806747, guid: 23a3b1d93c5d9554e93e18a070748a4b,
     type: 3}

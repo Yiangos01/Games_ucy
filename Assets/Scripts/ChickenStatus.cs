@@ -152,16 +152,19 @@ public class ChickenStatus : MonoBehaviour
 
         if (other.gameObject.CompareTag("GoldenEgg"))
         {
-            Destroy(other.gameObject);
-            goldenEgg++;
-            Debug.Log("Golden Egg " + goldenEgg);
-            //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
-            if (goldenEgg == 1) {
-              //  groundSpawner.IsBarn = true;
-                groundSpawner.SpawnBarn();
+            
+                Destroy(other.gameObject);
+                goldenEgg++;
+                Debug.Log("Golden Egg " + goldenEgg);
+                //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
+                if (goldenEgg == 1)
+                {
+                    //  groundSpawner.IsBarn = true;
+                    groundSpawner.SpawnBarn();
 
-                // Display ending Animation
-            }
+                    // Display ending Animation
+                }
+            
 
         }
         if (other.gameObject.CompareTag("Barn"))
@@ -206,7 +209,7 @@ public class ChickenStatus : MonoBehaviour
 
     {
 
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle") || collision.gameObject.CompareTag("GoldenEggCrate"))
         {
             if (!strengthMode)
             {
@@ -220,6 +223,7 @@ public class ChickenStatus : MonoBehaviour
                 }
                 //Set hit animation
                 animator.SetTrigger("IsHit");
+                
                 Destroy(collision.gameObject, 1.8f);//Destroy object after a while
             }
             else {//If in strength mode
@@ -227,6 +231,14 @@ public class ChickenStatus : MonoBehaviour
                 particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
                 particles.Play();//Play Particle Destruction
                 Destroy(collision.gameObject);//Object dissappears
+                if (collision.gameObject.CompareTag("GoldenEggCrate")) {//If is the crate then collect egg as well
+                    goldenEgg++;
+                    if (goldenEgg == 1)
+                    { 
+                        groundSpawner.SpawnBarn();
+                        
+                    }
+                }
             }
 
             

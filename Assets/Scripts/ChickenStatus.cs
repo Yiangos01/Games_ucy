@@ -251,10 +251,17 @@ public class ChickenStatus : MonoBehaviour
                 StartCoroutine(Blink());
             }
 
+
+            else
+            {//If in strength mode
+                particles.transform.position = collision.gameObject.transform.position;
+                particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
+                particles.Play();//Play Particle Destruction
+                Destroy(collision.gameObject);//Object dissappears
+            }
         }
 
-
-    }
+        }
     // Update is called once per frame
     void Update()
     {

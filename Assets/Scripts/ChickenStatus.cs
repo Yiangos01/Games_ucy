@@ -29,6 +29,7 @@ public class ChickenStatus : MonoBehaviour
     SkinnedMeshRenderer chk_rendererBD;
     SkinnedMeshRenderer chk_rendererWG;
     SkinnedMeshRenderer chk_rendererTH;
+    SpawnEffect strengthEffect;
     public int patternSize;
     public GameObject gameOverText;
 
@@ -39,7 +40,7 @@ public class ChickenStatus : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>();
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-      
+        strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         createTargetPattern();
 
@@ -126,6 +127,10 @@ public class ChickenStatus : MonoBehaviour
                 chk_rendererBD.material.color = strengthColor;
                 chk_rendererWG.material.color = strengthColor;
                 chk_rendererTH.material.color = strengthColor;
+                
+                strengthEffect.enabled = true;
+                strengthEffect.spawnEffectTime = strengthDuration;
+                strengthEffect.pause = 0.5f;
                 Debug.Log("Pattern completed");
                 Debug.Log("Create new pattern");
                 pattern.Clear();
@@ -195,13 +200,13 @@ public class ChickenStatus : MonoBehaviour
     //Function for blinking the object when hit a moving object
     private IEnumerator Blink()
     {
-            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             yield return new WaitForSeconds(0.2f);
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.2f);
-            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
             yield return new WaitForSeconds(0.2f);
-            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.2f);
     }
 
@@ -279,6 +284,7 @@ public class ChickenStatus : MonoBehaviour
             chk_rendererBD.material.color = originalColor;
             chk_rendererWG.material.color = originalColor;
             chk_rendererTH.material.color = originalColor;
+            strengthEffect.enabled = false;
         }
     }
 }

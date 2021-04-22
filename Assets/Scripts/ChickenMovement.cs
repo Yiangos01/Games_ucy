@@ -19,10 +19,13 @@ public class ChickenMovement : MonoBehaviour
     public GameObject uiFinish;
     private bool canMove = true;
     public GameObject initialfog;
+    float startTime;
+    public bool increaseSpeed = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.time;
         originalSpeed = moveSpeed;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
@@ -134,6 +137,14 @@ public class ChickenMovement : MonoBehaviour
             terrain_pos[0] = terrain_pos[0] - 500;
             terrain_pos[2] = terrain_pos[2] - 500;
             terrain.transform.position = terrain_pos;
+        }
+
+        // Increase Speed
+        if (increaseSpeed)
+        {
+            Debug.Log(Time.time - startTime);
+            moveSpeed += (Time.time - startTime) / 10;
+            startTime = Time.time;
         }
 
     }

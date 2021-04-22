@@ -85,7 +85,7 @@ MonoBehaviour:
   obstacle_pos_y: []
   obstacle_pos_z: []
   threshold_dist: 6
-  hardMode: 1
+  hardMode: 0
 --- !u!1 &968130799246889510
 GameObject:
   m_ObjectHideFlags: 0

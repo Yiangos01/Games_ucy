@@ -32,6 +32,13 @@ public class ChickenStatus : MonoBehaviour
     SpawnEffect strengthEffect;
     public int patternSize;
     public GameObject gameOverText;
+    public AudioSource foodSound;
+    public AudioSource eggSound;
+    public AudioSource hitObstacleSound;
+    public AudioSource breakObstacleSound;
+    public AudioSource gameOverSound;
+    public AudioSource winSound;
+    public AudioSource powerUpSound;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +130,8 @@ public class ChickenStatus : MonoBehaviour
             {
                 strStart = Time.time;
                 strengthMode = true;
+                // Play power up sound
+                powerUpSound.Play();
                 // Change Color
                 chk_rendererBD.material.color = strengthColor;
                 chk_rendererWG.material.color = strengthColor;
@@ -146,8 +155,9 @@ public class ChickenStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Food"))
         {
 
+            // Play food sound
+            foodSound.Play();  // plays sound when collided.
 
-            // Debug.Log(Fruits.Materials);
             Destroy(other.gameObject);
             updatePattern(other.gameObject.name);
             food++;
@@ -161,6 +171,7 @@ public class ChickenStatus : MonoBehaviour
                 Destroy(other.gameObject);
                 goldenEgg++;
                 Debug.Log("Golden Egg " + goldenEgg);
+                eggSound.Play();
                 //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
                 if (goldenEgg == 1)
                 {
@@ -175,7 +186,7 @@ public class ChickenStatus : MonoBehaviour
         if (other.gameObject.CompareTag("Barn"))
         {
 
-
+            winSound.Play();
             groundSpawner.SpawnChickens();
 
         }
@@ -219,11 +230,16 @@ public class ChickenStatus : MonoBehaviour
             if (!strengthMode)
             {
                 heart--;
+                // hit on obstacle sound
+                hitObstacleSound.Play();
                 Debug.Log("heart " + heart);
                 if (heart == 0)
-                { 
+                {
                     // Game Over message - button to restart or go back to main menu
+                    // Play game over music
+                    
                     gameOverText.SetActive(true);
+                    gameOverSound.Play();
                     Destroy(gameObject);
                 }
                 //Set hit animation
@@ -232,12 +248,16 @@ public class ChickenStatus : MonoBehaviour
                 Destroy(collision.gameObject, 1.8f);//Destroy object after a while
             }
             else {//If in strength mode
+                // Play break obsatcle sound
+                breakObstacleSound.Play();
                 particles.transform.position = collision.gameObject.transform.position;
                 particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
                 particles.Play();//Play Particle Destruction
                 Destroy(collision.gameObject);//Object dissappears
                 if (collision.gameObject.CompareTag("GoldenEggCrate")) {//If is the crate then collect egg as well
                     goldenEgg++;
+                    // Play egg sound
+                    eggSound.Play();
                     if (goldenEgg == 1)
                     { 
                         groundSpawner.SpawnBarn();
@@ -252,6 +272,7 @@ public class ChickenStatus : MonoBehaviour
         {
             if (!strengthMode)
             {
+                hitObstacleSound.Play();
                 heart--;
                 StartCoroutine(Blink());
             }
@@ -259,6 +280,7 @@ public class ChickenStatus : MonoBehaviour
 
             else
             {//If in strength mode
+                breakObstacleSound.Play();
                 particles.transform.position = collision.gameObject.transform.position;
                 particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
                 particles.Play();//Play Particle Destruction

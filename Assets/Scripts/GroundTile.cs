@@ -519,10 +519,13 @@ public class GroundTile : MonoBehaviour
         }
     }
     void Update() {
-        Vector3 dist = transform.position - player.transform.position;
-        if(fog!=null)
+
+        if (fog != null)
+        {
+            Vector3 dist = transform.position - player.transform.position;
             if (dist.magnitude <= 280f && fog.isPlaying)
                 fog.Stop();
+        }
     }
     
 }

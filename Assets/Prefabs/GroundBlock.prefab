@@ -125,7 +125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7545057932086448903}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GoldenEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4752239342539603476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,6 +389,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4642212903907955666}
     m_Modifications:
+    - target: {fileID: 531154717303019009, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 531154717303019013, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 531154717303019015, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393338158506246920, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158351688104550009, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158351688104550011, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158351688104550015, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3109055557305264105, guid: d3b01809f1af0d744ae9ee951e93697c,
         type: 3}
       propertyPath: m_Enabled
@@ -464,10 +499,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: TwoBlocks
       objectReference: {fileID: 0}
+    - target: {fileID: 4927323125020509302, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6072650915274699653, guid: d3b01809f1af0d744ae9ee951e93697c,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104418753266469395, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104418753266469397, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7104418753266469399, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8547512125945274138, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664077123895083625, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664077123895083627, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664077123895083629, guid: d3b01809f1af0d744ae9ee951e93697c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3b01809f1af0d744ae9ee951e93697c, type: 3}
@@ -664,6 +739,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GroundFogNew
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623640932283567007, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623640932283567007, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca9a5c25bc6bea047a87f875a08f7ddd, type: 3}

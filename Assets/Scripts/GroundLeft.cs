@@ -36,13 +36,16 @@ public class GroundLeft : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dist = transform.position - player.transform.position;
 
-        if(fog!=null)
+
+        if (fog != null)
+        {
+            Vector3 dist = transform.position - player.transform.position;
             if (dist.magnitude <= 150f && fog.isPlaying)
             {
                 transform.GetChild(16).GetComponent<ParticleSystem>().Stop();
             }
+        }
     }
 
     

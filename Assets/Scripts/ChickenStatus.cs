@@ -39,6 +39,8 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource gameOverSound;
     public AudioSource winSound;
     public AudioSource powerUpSound;
+    public AudioSource potionSound;
+    public AudioSource dizzySound;
 
     // Start is called before the first frame update
     void Start()
@@ -192,7 +194,7 @@ public class ChickenStatus : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Potion"))
         {
-
+            potionSound.Play();
             Destroy(other.gameObject);
             heart++;
 
@@ -243,6 +245,8 @@ public class ChickenStatus : MonoBehaviour
                     Destroy(gameObject);
                 }
                 //Set hit animation
+                //hitObstacleSound.Pause();
+               // dizzySound.Play();
                 animator.SetTrigger("IsHit");
                 
                 Destroy(collision.gameObject, 1.8f);//Destroy object after a while
@@ -287,8 +291,16 @@ public class ChickenStatus : MonoBehaviour
                 Destroy(collision.gameObject);//Object dissappears
             }
         }
-
+        if (collision.gameObject.CompareTag("OutOfTrack"))
+        {
+            gameOverText.SetActive(true);
+            gameOverSound.Play();
+            Destroy(gameObject);
+            heart = 0;
         }
+
+
+    }
     // Update is called once per frame
     void Update()
     {

@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856632411890136989}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 6702715424481658032}
   - component: {fileID: 6758072601840703701}
   - component: {fileID: 5518867704673821841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraCollision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8945156003049124870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422593408363944117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6741594145281142838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7944924593060611461}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2607877387490865472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GoldenEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,10 +715,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7755009143113505553}
     m_Modifications:
+    - target: {fileID: 516494062073882259, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 516494062073882261, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 516494062073882263, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1379191471816487834, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
         type: 3}
       propertyPath: m_Name
       value: OneBlock (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379191471816487834, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7387699385708006777, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
         type: 3}
@@ -774,6 +794,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298169, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298171, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298175, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d393f44999c3c4ab0e7fc11db4d4ae, type: 3}
@@ -965,6 +1000,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundFogNew
       objectReference: {fileID: 0}
+    - target: {fileID: 3623640932283567007, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623640932283567007, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca9a5c25bc6bea047a87f875a08f7ddd, type: 3}
 --- !u!4 &7391480179763593047 stripped
@@ -980,10 +1025,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7755009143113505553}
     m_Modifications:
+    - target: {fileID: 516494062073882259, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 516494062073882261, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 516494062073882263, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1379191471816487834, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
         type: 3}
       propertyPath: m_Name
       value: OneBlock
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379191471816487834, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7387699385708006777, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
         type: 3}
@@ -1039,6 +1104,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298169, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298171, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8667462012433298175, guid: 70d393f44999c3c4ab0e7fc11db4d4ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d393f44999c3c4ab0e7fc11db4d4ae, type: 3}

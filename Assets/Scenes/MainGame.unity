@@ -4785,6 +4785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 30
+  maxSpeed: 38
   jumpForce: 25
   groundLayers:
     serializedVersion: 2
@@ -4837,20 +4838,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c2c9a576e8396648befbc68eed7f4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chicken_move: {fileID: 0}
   food: 0
   heart: 4
   goldenEgg: 0
   isHit: 0
   pattern: 
-  targetPattern: 
+  targetPatternJump: 
+  targetPatternStrength: 
   Fruits: {fileID: 0}
   strengthMode: 0
+  jumpMode: 0
   particles: {fileID: 186084949}
   strengthDuration: 10
   chickenBody: {fileID: 2671341197205488534}
   chickenWings: {fileID: 119251647680831334}
   chickenThigs: {fileID: 1315458072225563919}
-  strengthColor: {r: 0, g: 1, b: 0.41347384, a: 0}
+  strengthColor: {r: 0, g: 0.38679248, b: 0.15926746, a: 0}
+  jumpColor: {r: 0, g: 0.65242577, b: 1, a: 0}
   patternSize: 1
   gameOverText: {fileID: 571927840}
   foodSound: {fileID: 199983983}
@@ -4860,6 +4865,7 @@ MonoBehaviour:
   gameOverSound: {fileID: 1426530670}
   winSound: {fileID: 705809013}
   powerUpSound: {fileID: 1418794623}
+  eggMax: 2
 --- !u!1 &3393568608516212906
 GameObject:
   m_ObjectHideFlags: 0

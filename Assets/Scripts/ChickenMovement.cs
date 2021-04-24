@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ChickenMovement : MonoBehaviour
 {
+    
     public float moveSpeed = 30.0f;
+    public float maxSpeed = 50.0f;
     public float jumpForce = 25.0f;
     protected float originalSpeed;
     protected Rigidbody rb;
@@ -21,6 +23,8 @@ public class ChickenMovement : MonoBehaviour
     public GameObject initialfog;
     float startTime;
     public bool increaseSpeed = true;
+    int eggCount = 0;
+    int eggMax = 6;
 
     // Start is called before the first frame update
     void Start()
@@ -49,25 +53,21 @@ public class ChickenMovement : MonoBehaviour
             canMove = false;
 
         }
+        if (other.gameObject.CompareTag("GoldenEgg"))
+        {
+            eggCount++;
+        }
     }
     void OnTriggerStay(Collider other)
     {
 
         if (other.gameObject.tag == "Left")
         {
-          
             rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(-other.gameObject.transform.right), 0.2f);
-
-           
-
         }
         if (other.gameObject.tag == "Right")
         {
-            
-
             rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(other.gameObject.transform.right), 0.2f);
-
-           
         }
 
     }
@@ -142,9 +142,12 @@ public class ChickenMovement : MonoBehaviour
         // Increase Speed
         if (increaseSpeed)
         {
-            Debug.Log(Time.time - startTime);
-            moveSpeed += (Time.time - startTime) / 10;
-            startTime = Time.time;
+            //Debug.Log(Time.time - startTime);
+            //moveSpeed += (Time.time - startTime) / 10;
+            //startTime = Time.time;
+            float diff = maxSpeed - moveSpeed;
+            //int eggCount = 0;
+            moveSpeed = moveSpeed + diff*eggCount/eggMax;
         }
 
     }

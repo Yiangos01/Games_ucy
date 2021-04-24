@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChickenStatus : MonoBehaviour
 {
+    public ChickenMovement chicken_move;
     [SerializeField] public int food = 0;
     [SerializeField] public int heart = 10;
     [SerializeField] public int goldenEgg = 0;
@@ -12,10 +13,12 @@ public class ChickenStatus : MonoBehaviour
     public bool isHit;
     protected ChickenMovement chMv;
     public List<int> pattern;
-    public List<int> targetPattern;
+    public List<int> targetPatternJump;
+    public List<int> targetPatternStrength;
     public GameObject Fruits;
     //public GameObject obstaclesPrefab;
     public bool strengthMode = false; //Is chicken in strength mode
+    public bool jumpMode = false; //Is chicken in strength mode
     public ParticleSystem particles;
     public float strengthDuration;
     float strStart;
@@ -25,6 +28,7 @@ public class ChickenStatus : MonoBehaviour
     public GameObject chickenThigs;
     //public GameObject uiFinish;
     public Color strengthColor;
+    public Color jumpColor;
     private Color originalColor;
     SkinnedMeshRenderer chk_rendererBD;
     SkinnedMeshRenderer chk_rendererWG;
@@ -39,7 +43,7 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource gameOverSound;
     public AudioSource winSound;
     public AudioSource powerUpSound;
-
+    public int eggMax = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +53,9 @@ public class ChickenStatus : MonoBehaviour
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
-        createTargetPattern();
+        
+        createTargetPatternStrength();
+        createTargetPatternJump();
 
         // Access chicken's body color
         chk_rendererBD = chickenBody.GetComponent<SkinnedMeshRenderer>();
@@ -60,22 +66,32 @@ public class ChickenStatus : MonoBehaviour
 
     }
 
-    void createTargetPattern()
+    void createTargetPatternStrength()
     {
         for (int i =0; i<patternSize; i++)
         {
             int number = Random.Range(1, 8);
-            targetPattern.Add(number);
+            targetPatternStrength.Add(number);
         }
     }
 
-    void updatePattern(string category)
+    void createTargetPatternJump()
+    {
+        for (int i = 0; i < patternSize; i++)
+        {
+            int number = Random.Range(1, 8);
+            targetPatternJump.Add(number);
+        }
+    }
+
+
+    void updatePatternJump(string category)
     {
         if (!strengthMode)
         {
             Debug.Log(category.Split(char.Parse("("))[0]);
             category = category.Split(char.Parse("("))[0];
-            int target_category = targetPattern[pattern.Count];
+            int target_category = targetPatternJump[pattern.Count];
 
             if (string.Compare(category, "apple") == 0)
             {
@@ -126,7 +142,90 @@ public class ChickenStatus : MonoBehaviour
                     pattern.Add(7);
                 }
             }
-            if (pattern.Count == targetPattern.Count)
+            if (pattern.Count == targetPatternJump.Count)
+            {
+                strStart = Time.time;
+                jumpMode = true;
+                // chicken_move.jumpForce = 35.0f;
+                // Play power up sound
+                powerUpSound.Play();
+                // Change Color
+                
+                chk_rendererBD.material.color = jumpColor;
+                chk_rendererWG.material.color = jumpColor;
+                chk_rendererTH.material.color = jumpColor;
+
+                strengthEffect.enabled = true;
+                strengthEffect.spawnEffectTime = strengthDuration;
+                strengthEffect.pause = 0.5f;
+                
+                Debug.Log("Pattern completed");
+                Debug.Log("Create new pattern");
+                pattern.Clear();
+                targetPatternJump.Clear();
+                createTargetPatternJump();
+            }
+        }
+    }
+
+    void updatePatternStrength(string category)
+    {
+        if (!strengthMode)
+        {
+            Debug.Log(category.Split(char.Parse("("))[0]);
+            category = category.Split(char.Parse("("))[0];
+            int target_category = targetPatternStrength[pattern.Count];
+
+            if (string.Compare(category, "apple") == 0)
+            {
+                if (target_category == 1)
+                {
+                    pattern.Add(1);
+                }
+            }
+            if (string.Compare(category, "banana") == 0)
+            {
+                if (target_category == 2)
+                {
+                    pattern.Add(2);
+                }
+            }
+            if (string.Compare(category, "carrot") == 0)
+            {
+                if (target_category == 3)
+                {
+                    pattern.Add(3);
+                }
+            }
+            if (string.Compare(category, "cherry") == 0)
+            {
+                if (target_category == 4)
+                {
+                    pattern.Add(4);
+                }
+            }
+            if (string.Compare(category, "grape") == 0)
+            {
+                if (target_category == 5)
+                {
+                    pattern.Add(5);
+                }
+            }
+            if (string.Compare(category, "pumpkin") == 0)
+            {
+                if (target_category == 6)
+                {
+                    pattern.Add(6);
+                }
+            }
+            if (string.Compare(category, "watermelon") == 0)
+            {
+                if (target_category == 7)
+                {
+                    pattern.Add(7);
+                }
+            }
+            if (pattern.Count == targetPatternStrength.Count)
             {
                 strStart = Time.time;
                 strengthMode = true;
@@ -143,8 +242,8 @@ public class ChickenStatus : MonoBehaviour
                 Debug.Log("Pattern completed");
                 Debug.Log("Create new pattern");
                 pattern.Clear();
-                targetPattern.Clear();
-                createTargetPattern();
+                targetPatternStrength.Clear();
+                createTargetPatternStrength();
             }
         }
     }
@@ -159,7 +258,8 @@ public class ChickenStatus : MonoBehaviour
             foodSound.Play();  // plays sound when collided.
 
             Destroy(other.gameObject);
-            updatePattern(other.gameObject.name);
+            updatePatternStrength(other.gameObject.name);
+            updatePatternJump(other.gameObject.name);
             food++;
             //Debug.Log("food " + food);
 
@@ -173,11 +273,10 @@ public class ChickenStatus : MonoBehaviour
                 Debug.Log("Golden Egg " + goldenEgg);
                 eggSound.Play();
                 //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
-                if (goldenEgg == 1)
+                if (goldenEgg == eggMax)
                 {
-                    //  groundSpawner.IsBarn = true;
+                    // GroundSpawner.IsBarn = true;
                     groundSpawner.SpawnBarn();
-
                     // Display ending Animation
                 }
             

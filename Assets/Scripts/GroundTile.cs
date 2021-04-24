@@ -19,6 +19,7 @@ public class GroundTile : MonoBehaviour
     public float threshold_dist;
     bool barn;//If spawn barn is true
     public bool hardMode;
+    public int eggTypeId;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,8 @@ public class GroundTile : MonoBehaviour
         fog = transform.GetChild(11).GetComponent<ParticleSystem>();
         barn = groundSpawner.isBarn;
         SpawnTrees();
+
+        eggTypeId = Random.Range(0, 3);
 
         if (!barn) {//If not spawn barn
             if (!groundSpawner.isStart)
@@ -309,13 +312,17 @@ public class GroundTile : MonoBehaviour
 
         Vector3 goldenEggPosition = new Vector3(x, y, z);
         //Create egg with crate
-        if (isCrate)
+        if (eggTypeId == 0)
+        {
+            eggType = goldenEggCratePrefab;
+        }
+        else if (eggTypeId == 1)
         {
             eggType = goldenEggCratePrefab;
         }
         else
         {
-            eggType = goldenEggPrefab;
+            eggType = goldenEggCratePrefab;
         }
         // Avoid Collision with other objects
         bool deploy = true;

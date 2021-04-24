@@ -19,7 +19,10 @@ public class GroundTile : MonoBehaviour
     public float threshold_dist;
     bool barn;//If spawn barn is true
     public bool hardMode;
+
     public int eggTypeId;
+    GameObject eggCounter;
+    public int eggs;
 
     // Start is called before the first frame update
     void Start()
@@ -30,19 +33,23 @@ public class GroundTile : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         fog = transform.GetChild(11).GetComponent<ParticleSystem>();
         barn = groundSpawner.isBarn;
+        eggCounter = GameObject.FindGameObjectWithTag("GoldenEggCounter");
+        eggs = eggCounter.GetComponent<GoldenEgg>().goldenEgg;
+        
         SpawnTrees();
 
         eggTypeId = Random.Range(0, 3);
+
 
         if (!barn) {//If not spawn barn
             if (!groundSpawner.isStart)
             {//At the start of the game don't spawn obstacles
              //Choose if spawn a moving obstacle-less chance
-                int moving = Random.Range(0, 5);
+                int moving = Random.Range(0, 8-eggs);//More chance to generate moving obstacles when got more eggs
                 if (hardMode)
                 {
                     // Avoid creating moving and stationary obstacle
-                    if (moving < 1)
+                    if (moving < 2)
                     {
                         SpawnObstacle(true);
                     }
@@ -50,11 +57,37 @@ public class GroundTile : MonoBehaviour
                     {
                         SpawnObstacle(false);
                         SpawnObstacle(false);
+                        if (eggs >= 2 && eggs<4) { //If collected between 2 and 4 eggs, spawn 3rd obstacle
+                            SpawnObstacle(false); 
+                        }
+                        else if (eggs >= 4)
+                        { //If collected 4 eggs, spawn 3rd and 4th obstacle
+                            SpawnObstacle(false); 
+                            SpawnObstacle(false); 
+                        }
+                           
+                            
+                        
                     }
                 }
                 else
-                {
-                    SpawnObstacle(moving < 1);
+                { if (moving < 2)
+                        SpawnObstacle(true);
+                    else
+                    {
+                        SpawnObstacle(false);
+                        SpawnObstacle(false);
+                        if (eggs >= 2 && eggs < 4)
+                        { //If collected between 2 and 4 eggs, spawn 3rd obstacle
+                            SpawnObstacle(false);
+                        }
+                        else if (eggs >= 4)
+                        { //If collected 4 eggs, spawn 3rd and 4th obstacle
+                            SpawnObstacle(false);
+                            SpawnObstacle(false);
+                        }
+                    }
+                   
                 }
             }
 
@@ -68,10 +101,10 @@ public class GroundTile : MonoBehaviour
 
             int frequencyEgg = Random.Range(0, 3);
             int frequencyPotion = Random.Range(0, 20);
-            int frequencyCrateEgg = Random.Range(0, 3);
+            int frequencyTypeEgg = Random.Range(0, 3);
             if (frequencyEgg < 1)
             {
-                SpawnGoldenEggs(frequencyCrateEgg<1);
+                SpawnGoldenEggs(frequencyTypeEgg);
             }
             if (frequencyPotion < 1)
             {
@@ -293,7 +326,7 @@ public class GroundTile : MonoBehaviour
         
     }
 
-    void SpawnGoldenEggs(bool isCrate)
+    void SpawnGoldenEggs(int type)
     {
         GameObject eggType;
         float z;
@@ -312,6 +345,7 @@ public class GroundTile : MonoBehaviour
 
         Vector3 goldenEggPosition = new Vector3(x, y, z);
         //Create egg with crate
+
         if (eggTypeId == 0)
         {
             eggType = goldenEggCratePrefab;
@@ -320,10 +354,14 @@ public class GroundTile : MonoBehaviour
         {
             eggType = goldenEggCratePrefab;
         }
-        else
+        else //if(type==1)
         {
             eggType = goldenEggCratePrefab;
         }
+       // else //Generate high egg if type ==2
+        //{
+        //    eggType = goldenHighEggPrefab;
+        //}
         // Avoid Collision with other objects
         bool deploy = true;
         foreach (float ob_x in obstacle_pos_x)
@@ -526,10 +564,13 @@ public class GroundTile : MonoBehaviour
         }
     }
     void Update() {
-        Vector3 dist = transform.position - player.transform.position;
-        if(fog!=null)
+
+        if (fog != null)
+        {
+            Vector3 dist = transform.position - player.transform.position;
             if (dist.magnitude <= 280f && fog.isPlaying)
                 fog.Stop();
+        }
     }
     
 }

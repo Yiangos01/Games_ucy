@@ -18,6 +18,11 @@ TagManager:
   - Food
   - Crate
   - GoldenEggCrate
+  - OutOfTrack
+  - GoldenEggCounter
+  - StrengthPatternUI
+  - StatusUI
+  - MenuLoader
   layers:
   - Default
   - TransparentFX
@@ -27,7 +32,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Track
   - 
   - 
   - 

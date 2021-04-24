@@ -32,11 +32,14 @@ public class GroundRight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+
+        if (fog != null)
+        {
             Vector3 dist = transform.position - player.transform.position;
-            if(fog!=null)
-              if (dist.magnitude <= 150f && fog.isPlaying)
-                   fog.Stop();
+            if (dist.magnitude <= 150f && fog.isPlaying)
+                fog.Stop();
+        }
         
     }
 

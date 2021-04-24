@@ -1110,6 +1110,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GroundFogNew
       objectReference: {fileID: 0}
+    - target: {fileID: 3623640932283567007, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca9a5c25bc6bea047a87f875a08f7ddd, type: 3}
 --- !u!4 &9106410066106655017 stripped

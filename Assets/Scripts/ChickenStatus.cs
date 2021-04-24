@@ -13,6 +13,7 @@ public class ChickenStatus : MonoBehaviour
     public bool isHit;
     protected ChickenMovement chMv;
     public List<int> pattern;
+    public List<int> targetPattern;
     public List<int> targetPatternJump;
     public List<int> targetPatternStrength;
     public GameObject Fruits;
@@ -43,7 +44,11 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource gameOverSound;
     public AudioSource winSound;
     public AudioSource powerUpSound;
+
     public int eggMax = 0;
+    public AudioSource potionSound;
+    public AudioSource dizzySound;
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +57,7 @@ public class ChickenStatus : MonoBehaviour
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
+       
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         
         createTargetPatternStrength();
@@ -273,6 +279,7 @@ public class ChickenStatus : MonoBehaviour
                 Debug.Log("Golden Egg " + goldenEgg);
                 eggSound.Play();
                 //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
+
                 if (goldenEgg == eggMax)
                 {
                     // GroundSpawner.IsBarn = true;
@@ -291,7 +298,7 @@ public class ChickenStatus : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Potion"))
         {
-
+            potionSound.Play();
             Destroy(other.gameObject);
             heart++;
 
@@ -319,7 +326,7 @@ public class ChickenStatus : MonoBehaviour
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.2f);
     }
-
+   
     private void OnCollisionEnter(Collision collision)
 
     {
@@ -338,10 +345,15 @@ public class ChickenStatus : MonoBehaviour
                     // Play game over music
                     
                     gameOverText.SetActive(true);
-                    gameOverSound.Play();
+                    gameOverSound.Play(); 
+                   
                     Destroy(gameObject);
+                   
+                    
                 }
                 //Set hit animation
+                //hitObstacleSound.Pause();
+               // dizzySound.Play();
                 animator.SetTrigger("IsHit");
                 
                 Destroy(collision.gameObject, 1.8f);//Destroy object after a while
@@ -386,8 +398,16 @@ public class ChickenStatus : MonoBehaviour
                 Destroy(collision.gameObject);//Object dissappears
             }
         }
-
+        if (collision.gameObject.CompareTag("OutOfTrack"))
+        {
+            gameOverText.SetActive(true);
+            gameOverSound.Play();
+            Destroy(gameObject);
+            heart = 0;
         }
+
+
+    }
     // Update is called once per frame
     void Update()
     {

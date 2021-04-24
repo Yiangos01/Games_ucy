@@ -3952,7 +3952,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f10cfabd95628504a87509e8e3afed93, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
@@ -5169,7 +5169,6 @@ GameObject:
   - component: {fileID: 3297595422997369780}
   - component: {fileID: 3297595422997369782}
   - component: {fileID: 3297595422997369778}
-  - component: {fileID: 3297595422997369779}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Player
@@ -5216,102 +5215,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!82 &3297595422997369779
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3297595422997369777}
-  m_Enabled: 0
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e920896567fd18a4cb23aace788167e3, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!54 &3297595422997369780
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5340,9 +5243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3973c3927207d6a40b663f2267790eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
-  maxSpeed: 38
+  moveSpeed: 25
+  startSpeed: 25
+  maxSpeed: 35
   jumpForce: 25
+  superJumpForce: 30
   groundLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -5396,28 +5301,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chicken_move: {fileID: 0}
   food: 0
-  heart: 1
+  heart: 10
   goldenEgg: 0
   isHit: 0
   pattern: 
-  targetPatternJump: 
   targetPatternStrength: 
   Fruits: {fileID: 0}
   strengthMode: 0
   jumpMode: 0
   particles: {fileID: 186084949}
-  strengthDuration: 10
+  strengthDuration: 15
   chickenBody: {fileID: 2671341197205488534}
   chickenWings: {fileID: 119251647680831334}
   chickenThigs: {fileID: 1315458072225563919}
-<<<<<<< HEAD
   strengthColor: {r: 0, g: 0.38679248, b: 0.15926746, a: 0}
   jumpColor: {r: 0, g: 0.65242577, b: 1, a: 0}
-  patternSize: 1
-=======
-  strengthColor: {r: 0, g: 1, b: 0.41347384, a: 0}
-  patternSize: 4
->>>>>>> ce1510c4aba5d9a2beae40fb7d0a8886873e145c
+  patternSize: 2
   gameOverText: {fileID: 571927840}
   foodSound: {fileID: 199983983}
   eggSound: {fileID: 1141044183}
@@ -5426,12 +5325,10 @@ MonoBehaviour:
   gameOverSound: {fileID: 1426530670}
   winSound: {fileID: 705809013}
   powerUpSound: {fileID: 1418794623}
-<<<<<<< HEAD
-  eggMax: 2
-=======
+  eggMax: 6
   potionSound: {fileID: 1026838477}
   dizzySound: {fileID: 1569112126}
->>>>>>> ce1510c4aba5d9a2beae40fb7d0a8886873e145c
+  counterEggSpawn: 0
 --- !u!1 &3393568608516212906
 GameObject:
   m_ObjectHideFlags: 0

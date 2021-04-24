@@ -86,7 +86,9 @@ MonoBehaviour:
   obstacle_pos_z: []
   threshold_dist: 6
   hardMode: 0
-  eggCounter: {fileID: 0}
+  jumpModeOffset: 5
+  eggTypeId: 0
+  eggs: 0
 --- !u!1 &968130799246889510
 GameObject:
   m_ObjectHideFlags: 0

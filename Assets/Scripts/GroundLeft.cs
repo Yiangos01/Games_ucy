@@ -11,12 +11,15 @@ public class GroundLeft : MonoBehaviour
     public GameObject goldenEggPrefab;
     GameObject player;
     ParticleSystem fog;
+    private ChickenStatus playerStatus;
     // Start is called before the first frame update
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         player = GameObject.FindGameObjectWithTag("Player");
         fog = transform.GetChild(16).GetComponent<ParticleSystem>();
+        playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
+        playerStatus.counterEggSpawn++;
         //SpawnObstacle();
         SpawnTrees();
         SpawnFruits();

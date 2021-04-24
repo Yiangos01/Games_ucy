@@ -16,7 +16,8 @@ public class StrengthPatternUI : MonoBehaviour
     public Image grape;
     public Image pumpkin;
     public Image watermelon;
-    Color initialColor = new Color(0.6698f, 0.654f, 0.654f, 1f);
+    //Color initialColor = new Color(0.6698f, 0.654f, 0.654f, 1f);
+    Color initialColor = new Color(0.2f, 0.2f, 0.2f, 1f);
     public List<Image> imgTargetPattern;
     public Image[] imgCurrentPattern;
     Image[] temp;
@@ -28,7 +29,7 @@ public class StrengthPatternUI : MonoBehaviour
     {
         chSt = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
         currPattern = chSt.pattern;
-        trgtPattern = chSt.targetPattern;
+        trgtPattern = chSt.targetPatternStrength;
         apple.color = initialColor;
         banana.color = initialColor;
         carrot.color = initialColor;
@@ -41,12 +42,12 @@ public class StrengthPatternUI : MonoBehaviour
        temp = new Image[chSt.patternSize];
         statusUI = GameObject.FindGameObjectWithTag("StatusUI");
         pos = statusUI.transform.GetChild(3).position;
-        Debug.Log("First elemen " + chSt.targetPattern.Count);
+        //Debug.Log("First elemen " + chSt.targetPatternStrength.Count);
     }
 
     void StorePattern() {
-        for (int i = 0; i < chSt.targetPattern.Count; i++) {
-            if (chSt.targetPattern[i] == 1)
+        for (int i = 0; i < trgtPattern.Count; i++) {
+            if (trgtPattern[i] == 1)
                 imgTargetPattern.Add(apple);
             else if (trgtPattern[i] == 2)
                 imgTargetPattern.Add(banana);
@@ -66,13 +67,13 @@ public class StrengthPatternUI : MonoBehaviour
     void Update()
     {
         
-        if (chSt.targetPattern.Count != 0 && count == 0 && !chSt.strengthMode)//Only one time at the start
+        if (trgtPattern.Count != 0 && count == 0 && !chSt.strengthMode)//Only one time at the start
         {
             StorePattern();
             count = 1;
             //Show target pattern onto screen
         for (int i = 0; i < imgTargetPattern.Count; i++) {
-                Debug.Log("UI posiiton" + pos);
+                // Debug.Log("UI posiiton" + pos);
                 Image t = Instantiate(imgTargetPattern[i], pos, Quaternion.identity, statusUI.transform);
                 pos = t.transform.GetChild(0).position;
                 temp[i] = t;
@@ -84,7 +85,6 @@ public class StrengthPatternUI : MonoBehaviour
         {
 
             temp[i].color = Color.white;
-           
 
         }
         if (chSt.strengthMode && count ==1) {

@@ -19,28 +19,32 @@ public class GroundTile : MonoBehaviour
     public float threshold_dist;
     bool barn;//If spawn barn is true
     public bool hardMode;
-
+    public float jumpModeOffset;
     public int eggTypeId;
     GameObject eggCounter;
     public int eggs;
+    private ChickenStatus playerStatus;
+    // only 1 egg in the track
+
 
     // Start is called before the first frame update
     void Start()
     {   
-        Debug.Log("Start first line");
+        // Debug.Log("Start first line");
         //Always spawn decor
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
         fog = transform.GetChild(11).GetComponent<ParticleSystem>();
         barn = groundSpawner.isBarn;
         eggCounter = GameObject.FindGameObjectWithTag("GoldenEggCounter");
         eggs = eggCounter.GetComponent<GoldenEgg>().goldenEgg;
         
         SpawnTrees();
-
-        eggTypeId = Random.Range(0, 3);
-
-
+        playerStatus.counterEggSpawn++;
+        // eggTypeId = Random.Range(0, 3);
+        int frequencyTypeEgg = Random.Range(0, 3);
+        SpawnGoldenEggs();
         if (!barn) {//If not spawn barn
             if (!groundSpawner.isStart)
             {//At the start of the game don't spawn obstacles
@@ -56,7 +60,7 @@ public class GroundTile : MonoBehaviour
                     else
                     {
                         SpawnObstacle(false);
-                        SpawnObstacle(false);
+                        //SpawnObstacle(false);
                         if (eggs >= 2 && eggs<4) { //If collected between 2 and 4 eggs, spawn 3rd obstacle
                             SpawnObstacle(false); 
                         }
@@ -64,14 +68,12 @@ public class GroundTile : MonoBehaviour
                         { //If collected 4 eggs, spawn 3rd and 4th obstacle
                             SpawnObstacle(false); 
                             SpawnObstacle(false); 
-                        }
-                           
-                            
-                        
+                        }   
                     }
                 }
                 else
-                { if (moving < 2)
+                { 
+                    if (moving < 2)
                         SpawnObstacle(true);
                     else
                     {
@@ -101,18 +103,13 @@ public class GroundTile : MonoBehaviour
 
             int frequencyEgg = Random.Range(0, 3);
             int frequencyPotion = Random.Range(0, 20);
-            int frequencyTypeEgg = Random.Range(0, 3);
-            if (frequencyEgg < 1)
-            {
-                SpawnGoldenEggs(frequencyTypeEgg);
-            }
+            
+
             if (frequencyPotion < 1)
             {
                 SpawnPotion();
             }
-            
             SpawnFruits();
-           
         }
     }
 
@@ -179,7 +176,7 @@ public class GroundTile : MonoBehaviour
         foreach (float ob_x in obstacle_pos_x)
         {
             
-            Debug.Log("in for loop");
+            // Debug.Log("in for loop");
             float diff_x;
             diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
             if (diff_x <= threshold_dist)
@@ -263,7 +260,7 @@ public class GroundTile : MonoBehaviour
         foreach (float ob_x in obstacle_pos_x)
         {
 
-            Debug.Log("in for loop");
+            // Debug.Log("in for loop");
             float diff_x;
             diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
             if (diff_x <= threshold_dist)
@@ -321,13 +318,14 @@ public class GroundTile : MonoBehaviour
             return;
         }
 
-
-
-        
     }
 
-    void SpawnGoldenEggs(int type)
+    void SpawnGoldenEggs()
     {
+        if ((playerStatus.counterEggSpawn % 7) != 0 || playerStatus.counterEggSpawn == 0)
+        {
+            return;
+        }
         GameObject eggType;
         float z;
         float x;
@@ -343,22 +341,42 @@ public class GroundTile : MonoBehaviour
         y = goldenEggPoint.position.y;
         y = y + goldenEggOffsetY;
 
-        Vector3 goldenEggPosition = new Vector3(x, y, z);
-        //Create egg with crate
 
-        if (eggTypeId == 0)
+        //Create egg with crate
+        Debug.Log("eggs");
+        Debug.Log(eggs);
+        if (eggs == 0)
+        {
+            eggType = goldenEggPrefab;
+            // eggType = goldenEggHighPrefab;
+            // y = 14.0f;
+        }
+        else if (eggs == 1)
+        {
+            eggType = goldenEggPrefab;
+            // eggType = goldenEggHighPrefab;
+            // y = 14.0f;
+        }
+        else if (eggs == 2)
         {
             eggType = goldenEggCratePrefab;
         }
-        else if (eggTypeId == 1)
+        else if (eggs == 3)
+        {
+            eggType = goldenEggPrefab;
+            y = 14.0f;
+        }
+        else if (eggs == 4)
         {
             eggType = goldenEggCratePrefab;
         }
-        else //if(type==1)
+        else
         {
-            eggType = goldenEggCratePrefab;
+            eggType = goldenEggPrefab;
+            y = 14.0f;
         }
-       // else //Generate high egg if type ==2
+        Vector3 goldenEggPosition = new Vector3(x, y, z);
+        // else //Generate high egg if type ==2
         //{
         //    eggType = goldenHighEggPrefab;
         //}
@@ -367,7 +385,7 @@ public class GroundTile : MonoBehaviour
         foreach (float ob_x in obstacle_pos_x)
         {
 
-            Debug.Log("in for loop");
+            // Debug.Log("in for loop");
             float diff_x;
             diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
             if (diff_x <= threshold_dist)
@@ -500,7 +518,7 @@ public class GroundTile : MonoBehaviour
             foreach (float ob_x in obstacle_pos_x)
             {
 
-                Debug.Log("in for loop");
+                //Debug.Log("in for loop");
                 float diff_x;
                 diff_x = Mathf.Abs(Mathf.Abs(ob_x) - Mathf.Abs(x));
                 if (diff_x <= threshold_dist)

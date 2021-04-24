@@ -6,8 +6,10 @@ public class ChickenMovement : MonoBehaviour
 {
     
     public float moveSpeed = 30.0f;
+    public float startSpeed = 30.0f;
     public float maxSpeed = 50.0f;
     public float jumpForce = 25.0f;
+    public float superJumpForce = 45.0f;
     protected float originalSpeed;
     protected Rigidbody rb;
     protected SphereCollider col;
@@ -25,6 +27,7 @@ public class ChickenMovement : MonoBehaviour
     public bool increaseSpeed = true;
     int eggCount = 0;
     int eggMax = 6;
+    private ChickenStatus playerStatus;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,7 @@ public class ChickenMovement : MonoBehaviour
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>(); //GetComponent<Animator>();
         chSt = GetComponent<ChickenStatus>();
         initialfog.GetComponent<ParticleSystem>().Stop();
+        playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
     }
 
     //Check if the player is grounded.
@@ -122,15 +126,25 @@ public class ChickenMovement : MonoBehaviour
     {
         if (canMove)
         {
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit)
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit && !playerStatus.strengthMode)
             {   //Jump Force
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 //Set part of Jump animation
                 animator.SetTrigger("Jump");
 
             }
-            isgrounded = IsGrounded();
 
+            Debug.Log(playerStatus.strengthMode);
+            if (IsGrounded() && playerStatus.strengthMode && Input.GetKeyDown(KeyCode.Space))
+            {
+                
+                //Jump Force
+                rb.AddForce(Vector3.up * superJumpForce, ForceMode.Impulse);
+                //Set part of Jump animation
+                animator.SetTrigger("Jump");
+            }
+
+            isgrounded = IsGrounded();
             // Move terrain based on player movement
             Vector3 terrain_pos = chicken.transform.position;
             terrain_pos[1] = -2;
@@ -139,15 +153,16 @@ public class ChickenMovement : MonoBehaviour
             terrain.transform.position = terrain_pos;
         }
 
+
         // Increase Speed
         if (increaseSpeed)
         {
-            //Debug.Log(Time.time - startTime);
-            //moveSpeed += (Time.time - startTime) / 10;
-            //startTime = Time.time;
-            float diff = maxSpeed - moveSpeed;
-            //int eggCount = 0;
-            moveSpeed = moveSpeed + diff*eggCount/eggMax;
+            // Increase spped based on collected egg number 
+            float diff = maxSpeed - startSpeed;
+            Debug.Log("In increased speed");
+            Debug.Log(eggCount);
+            Debug.Log(eggMax);
+            moveSpeed = startSpeed + ((diff/eggMax) * eggCount);
         }
 
     }

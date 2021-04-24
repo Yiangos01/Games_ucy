@@ -9,6 +9,7 @@ public class CountDownStart : MonoBehaviour
     public Text countdownDisplay;
     public Image backgroundFade;
     private GameObject player;
+    private GameObject strengthPatternUI;
     private ChickenMovement playerScript;
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,8 @@ public class CountDownStart : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript =  player.GetComponent<ChickenMovement>();
         playerScript.enabled = false;
+        strengthPatternUI = GameObject.FindGameObjectWithTag("StrengthPatternUI");
+        strengthPatternUI.GetComponent<StrengthPatternUI>().enabled = false;
     }
 
     IEnumerator CountdownToStart() {
@@ -37,7 +40,7 @@ public class CountDownStart : MonoBehaviour
         backgroundFade.gameObject.SetActive(false);
 
         playerScript.enabled = true; //Enable the script of movement again
-
+        strengthPatternUI.GetComponent<StrengthPatternUI>().enabled = true;
     }
 
    

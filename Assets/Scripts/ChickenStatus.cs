@@ -41,7 +41,7 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource powerUpSound;
     public AudioSource potionSound;
     public AudioSource dizzySound;
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +50,7 @@ public class ChickenStatus : MonoBehaviour
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
+       
         //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         createTargetPattern();
 
@@ -175,7 +176,7 @@ public class ChickenStatus : MonoBehaviour
                 Debug.Log("Golden Egg " + goldenEgg);
                 eggSound.Play();
                 //Spawn the Barn if collected 2 golden Eggs (End Game Condition)
-                if (goldenEgg == 1)
+                if (goldenEgg == 6)
                 {
                     //  groundSpawner.IsBarn = true;
                     groundSpawner.SpawnBarn();
@@ -222,7 +223,7 @@ public class ChickenStatus : MonoBehaviour
             transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
             yield return new WaitForSeconds(0.2f);
     }
-
+   
     private void OnCollisionEnter(Collision collision)
 
     {
@@ -241,8 +242,11 @@ public class ChickenStatus : MonoBehaviour
                     // Play game over music
                     
                     gameOverText.SetActive(true);
-                    gameOverSound.Play();
+                    gameOverSound.Play(); 
+                   
                     Destroy(gameObject);
+                   
+                    
                 }
                 //Set hit animation
                 //hitObstacleSound.Pause();

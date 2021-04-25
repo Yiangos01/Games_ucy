@@ -23,6 +23,10 @@ TagManager:
   - StrengthPatternUI
   - StatusUI
   - MenuLoader
+  - GoldenEggDisplayUI
+  - HeartDisplayUI
+  - LifeCounter
+  - FruitCounter
   layers:
   - Default
   - TransparentFX

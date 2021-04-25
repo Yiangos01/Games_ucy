@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ChickenStatus : MonoBehaviour
 {
-    public ChickenMovement chicken_move;
+
     [SerializeField] public int food = 0;
-    [SerializeField] public int heart = 10;
+    [SerializeField] public int heart = 4;
+    public int maxHeart = 8;
     [SerializeField] public int goldenEgg = 0;
     GroundSpawner groundSpawner;
     protected Animator animator;
@@ -16,10 +17,10 @@ public class ChickenStatus : MonoBehaviour
     // public List<int> targetPattern;
     // public List<int> targetPatternJump;
     public List<int> targetPatternStrength;
-    public GameObject Fruits;
+    //public GameObject Fruits;
     //public GameObject obstaclesPrefab;
     public bool strengthMode = false; //Is chicken in strength mode
-    public bool jumpMode = false; //Is chicken in jump mode
+   // public bool jumpMode = false; //Is chicken in jump mode
     public ParticleSystem particles;
     public float strengthDuration;
     float strStart;
@@ -29,7 +30,7 @@ public class ChickenStatus : MonoBehaviour
     public GameObject chickenThigs;
     //public GameObject uiFinish;
     public Color strengthColor;
-    public Color jumpColor;
+  //  public Color jumpColor;
     private Color originalColor;
     SkinnedMeshRenderer chk_rendererBD;
     SkinnedMeshRenderer chk_rendererWG;
@@ -59,7 +60,6 @@ public class ChickenStatus : MonoBehaviour
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
        
-        //particles = obstaclesPrefab.gameObject.transform.GetChild(5).GetComponent<ParticleSystem>();
         
         createTargetPatternStrength();
         // createTargetPatternJump();
@@ -302,19 +302,15 @@ public class ChickenStatus : MonoBehaviour
         {
             potionSound.Play();
             Destroy(other.gameObject);
-            heart++;
+            if(heart<maxHeart)
+                heart++;
 
         }
         
 
         
     }
-    private void OnTriggeredExit(Collider other) {
-        if (other.gameObject.CompareTag("Wave"))
-        {
-            Destroy(other.gameObject);
-        }
-    }
+   
 
     //Function for blinking the object when hit a moving object
     private IEnumerator Blink()
@@ -341,7 +337,7 @@ public class ChickenStatus : MonoBehaviour
                 // hit on obstacle sound
                 hitObstacleSound.Play();
                 Debug.Log("heart " + heart);
-                if (heart == 0)
+                if (heart <= 0)
                 {
                     // Game Over message - button to restart or go back to main menu
                     // Play game over music
@@ -354,8 +350,7 @@ public class ChickenStatus : MonoBehaviour
                     
                 }
                 //Set hit animation
-                //hitObstacleSound.Pause();
-               // dizzySound.Play();
+               
                 animator.SetTrigger("IsHit");
                 
                 Destroy(collision.gameObject, 1.8f);//Destroy object after a while
@@ -363,10 +358,12 @@ public class ChickenStatus : MonoBehaviour
             else {//If in strength mode
                 // Play break obsatcle sound
                 breakObstacleSound.Play();
+                //Break Simulation
                 particles.transform.position = collision.gameObject.transform.position;
                 particles.transform.rotation = Quaternion.LookRotation(-chMv.transform.right);
                 particles.Play();//Play Particle Destruction
                 Destroy(collision.gameObject);//Object dissappears
+                food = food + 10;
                 if (collision.gameObject.CompareTag("GoldenEggCrate")) {//If is the crate then collect egg as well
                     goldenEgg++;
                     // Play egg sound
@@ -387,7 +384,19 @@ public class ChickenStatus : MonoBehaviour
             {
                 hitObstacleSound.Play();
                 heart--;
-                StartCoroutine(Blink());
+                StartCoroutine(Blink()); 
+                if (heart <= 0)
+                {
+                    // Game Over message - button to restart or go back to main menu
+                    // Play game over music
+
+                    gameOverText.SetActive(true);
+                    gameOverSound.Play();
+
+                    Destroy(gameObject);
+
+
+                }
             }
 
 
@@ -430,16 +439,16 @@ public class ChickenStatus : MonoBehaviour
             strengthEffect.enabled = false;
         }
 
-        if (Time.time - strStart > strengthDuration && jumpMode)
-        {
+      //  if (Time.time - strStart > strengthDuration && jumpMode)
+       // {
 
-            StartCoroutine(Blink());//Blink to show that your strength mode is ending
-            jumpMode = false;
-            chk_rendererBD.material.color = originalColor;
-            chk_rendererWG.material.color = originalColor;
-            chk_rendererTH.material.color = originalColor;
+         //   StartCoroutine(Blink());//Blink to show that your strength mode is ending
+           // jumpMode = false;
+           // chk_rendererBD.material.color = originalColor;
+           // chk_rendererWG.material.color = originalColor;
+           // chk_rendererTH.material.color = originalColor;
             //strengthEffect.enabled = false;
-        }
+        //}
 
     }
 }

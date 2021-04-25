@@ -8,6 +8,7 @@ public class MenuLoader : MonoBehaviour
 {
     // Start is called before the first frame update
     public Text gameOver;
+    public Text win;
     public void LoadMenu()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
@@ -22,6 +23,8 @@ public class MenuLoader : MonoBehaviour
     void Update() {
         if(gameOver.isActiveAndEnabled)
              StartCoroutine(ExecuteAfterTime(6f));
+        if (win.isActiveAndEnabled)
+            StartCoroutine(ExecuteAfterTime(10f));
     }
 
 }

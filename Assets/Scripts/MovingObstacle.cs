@@ -22,7 +22,7 @@ public class MovingObstacle : MonoBehaviour
         
         //transform.position = transform.position + Time.deltaTime * dir*speed;Mathf.PingPong(Time.time * 0.5f, 0.5f)
        // transform.position = transform.position + direction*Time.deltaTime * speed;
-        transform.position = new Vector3(direction.x *Mathf.PingPong(Time.time * speed, 22f) +initialPos.x-11f* direction.x, transform.position.y, direction.z * Mathf.PingPong(Time.time * speed, 22f) + initialPos.z-11f* direction.z);
+        transform.position = new Vector3(direction.x *Mathf.PingPong(Time.time * speed, 28f) +initialPos.x-14f* direction.x, transform.position.y, direction.z * Mathf.PingPong(Time.time * speed, 28f) + initialPos.z-14f* direction.z);
        
     }
 }

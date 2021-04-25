@@ -9,7 +9,7 @@ public class ChickenMovement : MonoBehaviour
     public float startSpeed = 30.0f;
     public float maxSpeed = 50.0f;
     public float jumpForce = 25.0f;
-    public float superJumpForce = 45.0f;
+    public float superJumpForce = 40.0f;
     protected float originalSpeed;
     protected Rigidbody rb;
     protected SphereCollider col;
@@ -126,7 +126,7 @@ public class ChickenMovement : MonoBehaviour
     {
         if (canMove)
         {
-            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit && !playerStatus.strengthMode)
+            if (IsGrounded() && Input.GetKeyDown(KeyCode.Space) && !chSt.isHit)
             {   //Jump Force
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 //Set part of Jump animation
@@ -135,7 +135,7 @@ public class ChickenMovement : MonoBehaviour
             }
 
             Debug.Log(playerStatus.strengthMode);
-            if (IsGrounded() && playerStatus.strengthMode && Input.GetKeyDown(KeyCode.Space))
+            if (IsGrounded() && playerStatus.strengthMode && Input.GetKeyDown(KeyCode.UpArrow))
             {
                 
                 //Jump Force

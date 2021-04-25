@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class StrengthPatternUI : MonoBehaviour
 {
     ChickenStatus chSt;
-    List<int> currPattern;
+   
     List<int> trgtPattern;
-    int patternSz;
+    
     public Image apple;
     public Image banana;
     public Image carrot;
@@ -17,9 +17,8 @@ public class StrengthPatternUI : MonoBehaviour
     public Image pumpkin;
     public Image watermelon;
     //Color initialColor = new Color(0.6698f, 0.654f, 0.654f, 1f);
-    Color initialColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+    Color initialColor = new Color(0.5f, 0.5f, 0.5f, 1f);
     public List<Image> imgTargetPattern;
-    public Image[] imgCurrentPattern;
     Image[] temp;
     int count = 0;
     Vector3 pos;
@@ -28,7 +27,6 @@ public class StrengthPatternUI : MonoBehaviour
     void Start()
     {
         chSt = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
-        currPattern = chSt.pattern;
         trgtPattern = chSt.targetPatternStrength;
         apple.color = initialColor;
         banana.color = initialColor;
@@ -38,11 +36,11 @@ public class StrengthPatternUI : MonoBehaviour
         pumpkin.color = initialColor;
         watermelon.color = initialColor;
 
-        //imgTargetPattern = new Image[chSt.patternSize];
+        
        temp = new Image[chSt.patternSize];
         statusUI = GameObject.FindGameObjectWithTag("StatusUI");
-        pos = statusUI.transform.GetChild(3).position;
-        //Debug.Log("First elemen " + chSt.targetPatternStrength.Count);
+        pos = statusUI.transform.GetChild(1).position;
+        
     }
 
     void StorePattern() {
@@ -92,7 +90,7 @@ public class StrengthPatternUI : MonoBehaviour
             for (int i = 0; i < temp.Length; i++)
                 Destroy(temp[i]);
             imgTargetPattern.Clear();
-            pos = statusUI.transform.GetChild(3).position;
+            pos = statusUI.transform.GetChild(1).position;
 
         }
 

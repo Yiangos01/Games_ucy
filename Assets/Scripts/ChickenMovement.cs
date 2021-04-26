@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Cinemachine;
+ 
 
 public class ChickenMovement : MonoBehaviour
 {
@@ -28,7 +30,8 @@ public class ChickenMovement : MonoBehaviour
     int eggCount = 0;
     int eggMax = 6;
     private ChickenStatus playerStatus;
-
+    //public CinemachineVirtualCamera vcam;
+   // CinemachineComposer com;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +41,20 @@ public class ChickenMovement : MonoBehaviour
         col = GetComponent<SphereCollider>();
         animator = transform.GetChild(0).gameObject.GetComponent<Animator>(); //GetComponent<Animator>();
         chSt = GetComponent<ChickenStatus>();
-        initialfog.GetComponent<ParticleSystem>().Stop();
+        
         playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<ChickenStatus>();
+        StartCoroutine(ExecuteAfterTime(4f));
+        //com = vcam.GetCinemachineComponent<CinemachineComposer>();
+       // com.m_HorizontalDamping = 7f;
     }
-
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time); 
+        // Code to execute after the delay
+        initialfog.GetComponent<ParticleSystem>().Stop();
+      
+    }
+   
     //Check if the player is grounded.
     private bool IsGrounded()
     {
@@ -61,20 +74,29 @@ public class ChickenMovement : MonoBehaviour
         {
             eggCount++;
         }
+        //if (other.gameObject.tag == "TurnCollider") {
+         //   com.m_HorizontalDamping = 0.5f;
+        //}
+           
+
     }
+    
     void OnTriggerStay(Collider other)
     {
 
         if (other.gameObject.tag == "Left")
         {
+           // com.m_HorizontalDamping = 0.5f;
             rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(-other.gameObject.transform.right), 0.2f);
         }
         if (other.gameObject.tag == "Right")
         {
+           // com.m_HorizontalDamping = 0.5f;
             rb.rotation = Quaternion.Slerp(rb.rotation, Quaternion.LookRotation(other.gameObject.transform.right), 0.2f);
         }
 
     }
+
 
    
     void FixedUpdate()
@@ -164,6 +186,8 @@ public class ChickenMovement : MonoBehaviour
             Debug.Log(eggMax);
             moveSpeed = startSpeed + ((diff/eggMax) * eggCount);
         }
+        
+       
 
     }
 }

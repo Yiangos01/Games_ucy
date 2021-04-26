@@ -376,10 +376,7 @@ public class GroundTile : MonoBehaviour
             y = 14.0f;
         }
         Vector3 goldenEggPosition = new Vector3(x, y, z);
-        // else //Generate high egg if type ==2
-        //{
-        //    eggType = goldenHighEggPrefab;
-        //}
+       
         // Avoid Collision with other objects
         bool deploy = true;
         foreach (float ob_x in obstacle_pos_x)
@@ -460,7 +457,7 @@ public class GroundTile : MonoBehaviour
                 float x = transform.GetChild(3).transform.position.x;
                 float z = transform.GetChild(3).transform.position.z;
                 obstacle_pos_x.Add(x);
-                obstacle_pos_y.Add(1.5f);
+                obstacle_pos_y.Add(2f);
                 obstacle_pos_z.Add(z);
 
             }

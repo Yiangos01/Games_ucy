@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 3976326878732532991}
   m_Layer: 0
   m_Name: ColliderCamera
-  m_TagString: Untagged
+  m_TagString: TurnCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

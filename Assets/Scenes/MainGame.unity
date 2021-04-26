@@ -1653,13 +1653,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 10, z: -34.73}
-  m_XDamping: 3
+  m_FollowOffset: {x: 0, y: 12, z: -37}
+  m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
-  m_YawDamping: 3.7
+  m_YawDamping: 3
   m_RollDamping: 0
   m_AngularDamping: 0
 --- !u!114 &958804207
@@ -1688,7 +1688,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
-  m_CenterOnActivate: 0
+  m_CenterOnActivate: 1
 --- !u!114 &958804208
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -2612,8 +2612,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163994415}
-  m_LocalRotation: {x: 0.09928126, y: 0, z: 0, w: 0.99505943}
-  m_LocalPosition: {x: 0, y: 10, z: -34.73}
+  m_LocalRotation: {x: 0.11902183, y: 1e-45, z: 0, w: 0.99289167}
+  m_LocalPosition: {x: 0, y: 12, z: -37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 958804205}
@@ -2727,8 +2727,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193461753}
-  m_LocalRotation: {x: 0.09928126, y: 0, z: 0, w: 0.99505943}
-  m_LocalPosition: {x: 0, y: 10, z: -34.73}
+  m_LocalRotation: {x: 0.11902183, y: 1e-45, z: 0, w: 0.99289167}
+  m_LocalPosition: {x: 0, y: 12, z: -37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2071931107}
@@ -7115,7 +7115,7 @@ MonoBehaviour:
   chickenWings: {fileID: 119251647680831334}
   chickenThigs: {fileID: 1315458072225563919}
   strengthColor: {r: 0.21124065, g: 0.9528302, b: 0.8669793, a: 0}
-  patternSize: 2
+  patternSize: 1
   gameOverText: {fileID: 571927840}
   foodSound: {fileID: 199983983}
   eggSound: {fileID: 1141044183}
@@ -7298,12 +7298,12 @@ PrefabInstance:
     - target: {fileID: 3621971129216031465, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3621971129216031465, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 183
+      value: 274
       objectReference: {fileID: 0}
     - target: {fileID: 3621971129216031465, guid: ca9a5c25bc6bea047a87f875a08f7ddd,
         type: 3}

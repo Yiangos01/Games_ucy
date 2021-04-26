@@ -7102,7 +7102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: 0
-  heart: 8
+  heart: 4
   maxHeart: 8
   goldenEgg: 0
   isHit: 0
@@ -7115,7 +7115,7 @@ MonoBehaviour:
   chickenWings: {fileID: 119251647680831334}
   chickenThigs: {fileID: 1315458072225563919}
   strengthColor: {r: 0.21124065, g: 0.9528302, b: 0.8669793, a: 0}
-  patternSize: 1
+  patternSize: 2
   gameOverText: {fileID: 571927840}
   foodSound: {fileID: 199983983}
   eggSound: {fileID: 1141044183}

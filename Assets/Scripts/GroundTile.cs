@@ -60,7 +60,7 @@ public class GroundTile : MonoBehaviour
                     else
                     {
                         SpawnObstacle(false);
-                        //SpawnObstacle(false);
+                        SpawnObstacle(false);
                         if (eggs >= 2 && eggs<4) { //If collected between 2 and 4 eggs, spawn 3rd obstacle
                             SpawnObstacle(false); 
                         }

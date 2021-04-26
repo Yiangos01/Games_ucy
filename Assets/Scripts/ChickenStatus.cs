@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ChickenStatus : MonoBehaviour
 {
 
@@ -50,7 +51,8 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource potionSound;
     public AudioSource dizzySound;
     public int counterEggSpawn=0;
-
+   
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +61,8 @@ public class ChickenStatus : MonoBehaviour
         chMv = GetComponent<ChickenMovement>();
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
         strengthEffect = transform.GetChild(1).gameObject.GetComponent<SpawnEffect>();
+
        
-        
         createTargetPatternStrength();
         // createTargetPatternJump();
 
@@ -68,7 +70,8 @@ public class ChickenStatus : MonoBehaviour
         chk_rendererBD = chickenBody.GetComponent<SkinnedMeshRenderer>();
         chk_rendererWG = chickenWings.GetComponent<SkinnedMeshRenderer>();
         chk_rendererTH = chickenThigs.GetComponent<SkinnedMeshRenderer>();
-        originalColor = chk_rendererBD.material.color;
+        originalColor = chk_rendererBD.material.color; 
+        
 
 
 
@@ -296,6 +299,7 @@ public class ChickenStatus : MonoBehaviour
 
             winSound.Play();
             groundSpawner.SpawnChickens();
+           
 
         }
         if (other.gameObject.CompareTag("Potion"))
@@ -384,7 +388,7 @@ public class ChickenStatus : MonoBehaviour
             {
                 hitObstacleSound.Play();
                 heart--;
-                StartCoroutine(Blink()); 
+                
                 if (heart <= 0)
                 {
                     // Game Over message - button to restart or go back to main menu
@@ -397,6 +401,9 @@ public class ChickenStatus : MonoBehaviour
 
 
                 }
+                // StartCoroutine(Blink());
+                animator.SetTrigger("IsHit");
+                Destroy(collision.gameObject);//Destroy object after a while
             }
 
 

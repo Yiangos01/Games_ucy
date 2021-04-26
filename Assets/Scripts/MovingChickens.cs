@@ -11,9 +11,9 @@ public class MovingChickens : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         hmove= Random.Range(-0.4f,0.4f);
+         hmove= Random.Range(-0.5f,0.5f);
          vmove= Random.Range(0f,1f);
-         speed = Random.Range(5.0f, 15.0f);
+         speed = Random.Range(5.0f, 20.0f);
     }
 
     // Update is called once per frame

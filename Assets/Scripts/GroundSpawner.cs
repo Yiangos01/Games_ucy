@@ -132,7 +132,7 @@ public class GroundSpawner : MonoBehaviour
         temp6.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
         GameObject temp7 = Instantiate(spawnChickenWalk, new Vector3(barnPos.x, 1.0f, barnPos.z), Quaternion.identity);
         temp7.transform.Rotate(global_rotation.x, global_rotation.y, global_rotation.z, Space.Self);
-
+       
         Destroy(temp, 10);
         Destroy(temp1, 10);
         Destroy(temp2, 10);

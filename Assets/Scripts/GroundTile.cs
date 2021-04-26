@@ -161,7 +161,7 @@ public class GroundTile : MonoBehaviour
         int fruitType = Random.Range(0, 7);
         // Choose a random point to spawn fruit
         int fruitOffset = Random.Range(-16, 16);
-        int fruitOffsetY = Random.Range(0, 5);
+        int fruitOffsetY = Random.Range(0, 6);
         Transform fruitPoint = transform.GetChild(8).transform;
         z = fruitPoint.position.z;
         z = z + fruitOffset;
@@ -244,7 +244,7 @@ public class GroundTile : MonoBehaviour
 
         // Choose a random point to spawn fruit
         int potionOffset = Random.Range(-16, 16);
-        int potionOffsetY = Random.Range(0, 5);
+        int potionOffsetY = Random.Range(0, 6);
         Transform potionPoint = transform.GetChild(10).transform;
         z = potionPoint.position.z;
         z = z + potionOffset;
@@ -332,7 +332,7 @@ public class GroundTile : MonoBehaviour
         float y;
         // Choose a random point to spawn fruit
         int goldenEggOffset = Random.Range(-16, 16);
-        int goldenEggOffsetY = Random.Range(0, 5);
+        int goldenEggOffsetY = Random.Range(0, 6);
         Transform goldenEggPoint = transform.GetChild(9).transform;
         z = goldenEggPoint.position.z;
         z = z + goldenEggOffset;
@@ -457,7 +457,7 @@ public class GroundTile : MonoBehaviour
                 float x = transform.GetChild(3).transform.position.x;
                 float z = transform.GetChild(3).transform.position.z;
                 obstacle_pos_x.Add(x);
-                obstacle_pos_y.Add(2f);
+                obstacle_pos_y.Add(4f);
                 obstacle_pos_z.Add(z);
 
             }
@@ -471,7 +471,7 @@ public class GroundTile : MonoBehaviour
                 Instantiate(obstaclesPrefab.transform.GetChild(6).gameObject, spawnPoint.position, Quaternion.LookRotation(spawnPoint.forward), transform);
 
                 obstacle_pos_x.Add(x);
-                obstacle_pos_y.Add(2f);
+                obstacle_pos_y.Add(4f);
                 obstacle_pos_z.Add(z);
             }
         }
@@ -508,7 +508,7 @@ public class GroundTile : MonoBehaviour
                 if (frequency == 0)
                     rotation = Quaternion.LookRotation(spawnPoint.forward);
                 else
-                    rotation = Quaternion.LookRotation(-spawnPoint.right);
+                    rotation = Quaternion.LookRotation(spawnPoint.right);
             }
 
             bool deploy = true;

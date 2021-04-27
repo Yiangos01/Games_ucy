@@ -7,9 +7,9 @@ using UnityEngine;
 public class ChickenMovement : MonoBehaviour
 {
     
-    public float moveSpeed = 30.0f;
-    public float startSpeed = 30.0f;
-    public float maxSpeed = 50.0f;
+    public float moveSpeed = 25.0f;
+    public float startSpeed = 25.0f;
+    public float maxSpeed = 35.0f;
     public float jumpForce = 25.0f;
     public float superJumpForce = 40.0f;
     protected float originalSpeed;

@@ -23,7 +23,7 @@ public class ChickenStatus : MonoBehaviour
     public bool strengthMode = false; //Is chicken in strength mode
    // public bool jumpMode = false; //Is chicken in jump mode
     public ParticleSystem particles;
-    public float strengthDuration;
+    public float strengthDuration = 18;
     float strStart;
 
     public GameObject chickenBody;
@@ -37,7 +37,7 @@ public class ChickenStatus : MonoBehaviour
     SkinnedMeshRenderer chk_rendererWG;
     SkinnedMeshRenderer chk_rendererTH;
     SpawnEffect strengthEffect;
-    public int patternSize;
+    public int patternSize = 2;
     public GameObject gameOverText;
     public AudioSource foodSound;
     public AudioSource eggSound;
@@ -47,7 +47,7 @@ public class ChickenStatus : MonoBehaviour
     public AudioSource winSound;
     public AudioSource powerUpSound;
 
-    public int eggMax = 0;
+    public int eggMax = 6;
     public AudioSource potionSound;
     public AudioSource dizzySound;
     public int counterEggSpawn=0;

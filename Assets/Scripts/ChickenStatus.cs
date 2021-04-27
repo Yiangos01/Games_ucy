@@ -382,7 +382,7 @@ public class ChickenStatus : MonoBehaviour
 
             
         }
-        if (collision.gameObject.CompareTag("RotatingObstacle"))//The object blinks-flickers when hit moving objects
+        if (collision.gameObject.CompareTag("RotatingObstacle") || collision.gameObject.CompareTag("MovingObstacle"))//The object blinks-flickers when hit moving objects
         {
             if (!strengthMode)
             {
@@ -401,9 +401,9 @@ public class ChickenStatus : MonoBehaviour
 
 
                 }
-                // StartCoroutine(Blink());
-                animator.SetTrigger("IsHit");
-                Destroy(collision.gameObject);//Destroy object after a while
+                StartCoroutine(Blink());
+               // animator.SetTrigger("IsHit");
+                Destroy(collision.gameObject,0.2f);//Destroy object after a while
             }
 
 

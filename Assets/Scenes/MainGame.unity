@@ -709,10 +709,10 @@ RectTransform:
   m_Father: {fileID: 1590807720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8.4, y: 0.0012054}
-  m_SizeDelta: {x: 1616.7351, y: 899.31287}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &525727953 stripped
 RectTransform:
@@ -2612,7 +2612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163994415}
-  m_LocalRotation: {x: 0.11902183, y: -1e-45, z: -0, w: 0.99289167}
+  m_LocalRotation: {x: 0.11902183, y: 1e-45, z: 0, w: 0.99289167}
   m_LocalPosition: {x: 0, y: 12, z: -37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2639,13 +2639,13 @@ MonoBehaviour:
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_MinimumDistanceFromTarget: 3.02
+  m_MinimumDistanceFromTarget: 1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
-  m_MinimumOcclusionTime: 0.34
-  m_CameraRadius: 0.2
+  m_MinimumOcclusionTime: 0.2
+  m_CameraRadius: 0.5
   m_Strategy: 2
-  m_MaximumEffort: 3
+  m_MaximumEffort: 4
   m_SmoothingTime: 0
   m_Damping: 2.15
   m_DampingWhenOccluded: 2.15
@@ -2727,7 +2727,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193461753}
-  m_LocalRotation: {x: 0.11902183, y: -1e-45, z: 0, w: 0.99289167}
+  m_LocalRotation: {x: 0.11902183, y: 1e-45, z: 0, w: 0.99289167}
   m_LocalPosition: {x: 0, y: 12, z: -37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2968,10 +2968,10 @@ RectTransform:
   m_Father: {fileID: 1590807720}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9}
-  m_SizeDelta: {x: 776.52765, y: 331.81027}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1277429561
 CanvasRenderer:
@@ -7102,7 +7102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: 0
-  heart: 4
+  heart: 7
   maxHeart: 8
   goldenEgg: 0
   isHit: 0
@@ -7110,7 +7110,7 @@ MonoBehaviour:
   targetPatternStrength: 
   strengthMode: 0
   particles: {fileID: 186084949}
-  strengthDuration: 15
+  strengthDuration: 18
   chickenBody: {fileID: 2671341197205488534}
   chickenWings: {fileID: 119251647680831334}
   chickenThigs: {fileID: 1315458072225563919}
